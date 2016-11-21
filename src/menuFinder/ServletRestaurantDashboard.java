@@ -55,7 +55,8 @@ public class ServletRestaurantDashboard extends HttpServlet {
 		System.out.println("Creating restaurant: " + name);
 		RestaurantBean r = new RestaurantBean(name, request.getParameter("cif"), request.getParameter("address"),
 				request.getParameter("city"), request.getParameter("postalcode"), request.getParameter("state"),
-				request.getParameter("country"), request.getParameter("email"), request.getParameter("phone"));
+				request.getParameter("country"), request.getParameter("email"), request.getParameter("phone"),
+				request.getParameter("account"));
 		r.save();
 		doGet(request, response);
 	}

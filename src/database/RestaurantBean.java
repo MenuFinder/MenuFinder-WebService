@@ -20,9 +20,10 @@ public class RestaurantBean extends Bean {
 	private String country;
 	private String email;
 	private String phone;
+	private String account;
 
 	public RestaurantBean(long id, String name, String cif, String address, String city, String postalCode,
-			String state, String country, String email, String phone) {
+			String state, String country, String email, String phone, String account) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -34,11 +35,12 @@ public class RestaurantBean extends Bean {
 		this.country = country;
 		this.email = email;
 		this.phone = phone;
+		this.account = account;
 		isNewRecord = false;
 	}
 
 	public RestaurantBean(String name, String cif, String address, String city, String postalCode, String state,
-			String country, String email, String phone) {
+			String country, String email, String phone, String account) {
 		super();
 		this.name = name;
 		this.cif = cif;
@@ -49,6 +51,7 @@ public class RestaurantBean extends Bean {
 		this.country = country;
 		this.email = email;
 		this.phone = phone;
+		this.account = account;
 		id = -1;
 		isNewRecord = true;
 	}
@@ -138,6 +141,14 @@ public class RestaurantBean extends Bean {
 		this.phone = phone;
 	}
 
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -154,8 +165,9 @@ public class RestaurantBean extends Bean {
 
 	protected String getInsertQuery() {
 		return "INSERT INTO " + table + " (name, cif, address, city, " + "postalcode, state, country, "
-				+ "email, phone) VALUES ('" + name + "', '" + cif + "', '" + address + "', '" + city + "', "
-				+ postalCode + ", '" + state + "', '" + country + "', '" + email + "', '" + phone + "')";
+				+ "email, phone, account) VALUES ('" + name + "', '" + cif + "', '" + address + "', '" + city + "', "
+				+ postalCode + ", '" + state + "', '" + country + "', '" + email + "', '" + phone + "', '" + account
+				+ "')";
 	}
 
 	public static RestaurantBean getRestaurantById(long id) {
@@ -194,7 +206,7 @@ public class RestaurantBean extends Bean {
 		try {
 			return new RestaurantBean(rs.getLong("id"), rs.getString("name"), rs.getString("cif"),
 					rs.getString("address"), rs.getString("city"), rs.getString("postalcode"), rs.getString("state"),
-					rs.getString("country"), rs.getString("email"), rs.getString("phone"));
+					rs.getString("country"), rs.getString("email"), rs.getString("phone"), rs.getString("account"));
 		} catch (SQLException e) {
 			System.err.println("Error retrieving bean.");
 			e.printStackTrace();

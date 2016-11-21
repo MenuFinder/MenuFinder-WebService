@@ -23,6 +23,7 @@
 		<p>Country: ${restaurant.country}</p>
 		<p>Email: ${restaurant.email}</p>
 		<p>Phone: ${restaurant.phone}</p>
+		<p>Account: ${restaurant.account}</p>
 	</c:forEach>
 </body>
 </html>
