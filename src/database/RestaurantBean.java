@@ -173,7 +173,7 @@ public class RestaurantBean extends Bean {
 	public static RestaurantBean getRestaurantById(long id) {
 		try {
 			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM " + table);
+			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE id = " + id);
 			rs.next();
 			return getRestaurantFromRS(rs);
 		} catch (SQLException ex) {
