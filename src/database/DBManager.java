@@ -42,7 +42,7 @@ public class DBManager {
 		return (DataSource) new InitialContext().lookup(datasource);
 	}
 
-	public void deleteBean(Bean m) {
+	protected void deleteBean(Bean m) {
 		try {
 			DBManager db = DBManager.getInstance();
 			db.executeUpdate(m.getDeleteQuery());
@@ -52,7 +52,7 @@ public class DBManager {
 		}
 	}
 
-	public void updateBean(Bean m) {
+	protected void updateBean(Bean m) {
 		try {
 			DBManager db = DBManager.getInstance();
 			db.executeUpdate(m.getUpdateQuery());
@@ -62,7 +62,7 @@ public class DBManager {
 		}
 	}
 
-	public void insertBean(Bean m) {
+	protected void insertBean(Bean m) {
 		try {
 			DBManager db = DBManager.getInstance();
 			db.executeUpdate(m.getInsertQuery());
