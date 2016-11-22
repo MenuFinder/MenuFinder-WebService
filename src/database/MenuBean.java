@@ -133,6 +133,21 @@ public class MenuBean extends Bean {
 		return menus;
 	}
 
+	public static List<MenuBean> getMenusOfRestaurant(long restaurantId) {
+		List<MenuBean> menus = new ArrayList<>();
+		try {
+			DBManager db = DBManager.getInstance();
+			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE restaurant = " + restaurantId);
+			while (rs.next()) {
+				menus.add(getMenuFromRS(rs));
+			}
+		} catch (SQLException ex) {
+			System.err.println("Error retrieving menus list.");
+			ex.printStackTrace();
+		}
+		return menus;
+	}
+
 	private static MenuBean getMenuFromRS(ResultSet rs) {
 		try {
 			return new MenuBean(rs.getLong("id"), rs.getLong("restaurant"), rs.getString("name"),
