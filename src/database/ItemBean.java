@@ -88,13 +88,6 @@ public class ItemBean extends Bean {
 		this.restaurant = restaurant;
 	}
 
-	private long id;
-	private String name;
-	private String description;
-	private double price;
-	private double score;
-	private long restaurant;
-
 	protected String getDeleteQuery() {
 		return "DELETE FROM " + table + " WHERE id = " + id;
 	}
@@ -109,7 +102,7 @@ public class ItemBean extends Bean {
 				+ description + "', '" + price + "', '" + score + "', " + restaurant + "')";
 	}
 
-	public static ItemBean getRestaurantById(long id) {
+	public static ItemBean getIteamtById(long id) {
 		try {
 			DBManager db = DBManager.getInstance();
 			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE id = " + id);
