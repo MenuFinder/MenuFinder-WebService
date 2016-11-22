@@ -45,6 +45,7 @@ public class ItemBean extends Bean {
 	}
 
 	public void setId(long id) {
+		isNewRecord = false;
 		this.id = id;
 	}
 
