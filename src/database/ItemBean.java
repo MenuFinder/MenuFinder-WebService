@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class ItemBean extends Bean {
 
 	private static final long serialVersionUID = 1L;
-	private static final String table = "menufinder.item";
+	private static final String table = "item";
 
 	private long id;
 	private String name;

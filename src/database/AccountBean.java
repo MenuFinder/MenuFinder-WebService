@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class AccountBean extends Bean {
 
 	private static final long serialVersionUID = 1L;
-	private static final String table = "menufinder.account";
+	private static final String table = "account";
 
 	private String id;
 	private String password;

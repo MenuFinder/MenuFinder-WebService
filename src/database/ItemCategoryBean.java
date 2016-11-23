@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ItemCategoryBean extends Bean {
 	private static final long serialVersionUID = 1L;
-	private static final String table = "menufinder.itemcategory";
+	private static final String table = "itemcategory";
 
 	private long id;
 	private String name;

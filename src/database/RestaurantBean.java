@@ -8,7 +8,7 @@ import java.util.List;
 public class RestaurantBean extends Bean {
 
 	private static final long serialVersionUID = 1L;
-	private static final String table = "menufinder.restaurant";
+	private static final String table = "restaurant";
 
 	private long id;
 	private String name;
