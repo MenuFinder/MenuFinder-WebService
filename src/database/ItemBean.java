@@ -98,13 +98,13 @@ public class ItemBean extends Bean {
 	}
 
 	protected String getUpdateQuery() {
-		return "UPDATE " + table + " SET name = '" + name + "', description = '" + description + "', price = '" + price
-				+ "', score = '" + score + "', restaurant = " + restaurant + "' WHERE id = " + id;
+		return "UPDATE " + table + " SET name = '" + name + "', description = '" + description + "', price = " + price
+				+ ", score = " + score + ", restaurant = " + restaurant + " WHERE id = " + id;
 	}
 
 	protected String getInsertQuery() {
 		return "INSERT INTO " + table + " (name, description, price, score, restaurant) VALUES ('" + name + "', '"
-				+ description + "', '" + price + "', '" + score + "', " + restaurant + "')";
+				+ description + "', " + price + ", " + score + ", " + restaurant + ")";
 	}
 
 	public static ItemBean getIteamtById(long id) {
