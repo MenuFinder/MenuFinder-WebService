@@ -198,6 +198,21 @@ public class RestaurantBean extends Bean {
 		return restaurants;
 	}
 
+	public static List<RestaurantBean> getRestaurantsOfAccount(String accountId) {
+		List<RestaurantBean> restaurants = new ArrayList<>();
+		try {
+			DBManager db = DBManager.getInstance();
+			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE account = '" + accountId + "'");
+			while (rs.next()) {
+				restaurants.add(getRestaurantFromRS(rs));
+			}
+		} catch (SQLException ex) {
+			System.err.println("Error retrieving restaurants list of account '" + accountId + "'.");
+			ex.printStackTrace();
+		}
+		return restaurants;
+	}
+
 	public String getAllRowsQuery() {
 		return "SELECT * FROM " + table;
 	}
