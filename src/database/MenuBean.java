@@ -96,13 +96,13 @@ public class MenuBean extends Bean {
 	}
 
 	protected String getUpdateQuery() {
-		return "UPDATE " + table + " SET restaurant = '" + restaurant + "', name = '" + name + "', description = '"
-				+ description + "', price = '" + price + "', score = " + score + "' WHERE id = " + id;
+		return "UPDATE " + table + " SET restaurant = " + restaurant + ", name = '" + name + "', description = '"
+				+ description + "', price = " + price + ", score = " + score + " WHERE id = " + id;
 	}
 
 	protected String getInsertQuery() {
-		return "INSERT INTO " + table + " (restaurant, name, description, price, score) VALUES ('" + restaurant + "', '"
-				+ name + "', '" + description + "', '" + price + "', '" + score + "')";
+		return "INSERT INTO " + table + " (restaurant, name, description, price, score) VALUES (" + restaurant + ", '"
+				+ name + "', '" + description + "', " + price + ", " + score + ")";
 	}
 
 	public static MenuBean getRestaurantById(long id) {
