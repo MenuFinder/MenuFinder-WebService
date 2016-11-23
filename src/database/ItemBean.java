@@ -3,7 +3,9 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ItemBean extends Bean {
 
@@ -131,6 +133,27 @@ public class ItemBean extends Bean {
 			ex.printStackTrace();
 		}
 		return items;
+	}
+
+	public static Map<String, List<ItemBean>> getMenuItemsByCategory(long menuId) {
+		Map<String, List<ItemBean>> itemsCategory = new HashMap<String, List<ItemBean>>();
+		try {
+			DBManager db = DBManager.getInstance();
+			ResultSet rs = db.executeQuery(
+					"SELECT ic.name AS category, mi.item AS itemid FROM itemcategory ic, menuitem mi WHERE mi.menu = "
+							+ menuId + " AND ic.id = mi.itemcategory");
+			while (rs.next()) {
+				String category = rs.getString("category");
+				if (!itemsCategory.containsKey(category)) {
+					itemsCategory.put(category, new ArrayList<ItemBean>());
+				}
+				itemsCategory.get(category).add(getIteamtById(rs.getLong("itemid")));
+			}
+		} catch (SQLException ex) {
+			System.err.println("Error retrieving item list of menu '" + menuId + "'.");
+			ex.printStackTrace();
+		}
+		return itemsCategory;
 	}
 
 	private static ItemBean getItemsFromRS(ResultSet rs) {
