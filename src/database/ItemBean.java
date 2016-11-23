@@ -2,6 +2,8 @@ package database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemBean extends Bean {
 
@@ -114,6 +116,21 @@ public class ItemBean extends Bean {
 			ex.printStackTrace();
 			return null;
 		}
+	}
+
+	public static List<ItemBean> getRestaurantItems(long restaurantId) {
+		List<ItemBean> items = new ArrayList<>();
+		try {
+			DBManager db = DBManager.getInstance();
+			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE restaurant = " + restaurantId);
+			while (rs.next()) {
+				items.add(getItemsFromRS(rs));
+			}
+		} catch (SQLException ex) {
+			System.err.println("Error retrieving item list of restaurant '" + restaurantId + "'.");
+			ex.printStackTrace();
+		}
+		return items;
 	}
 
 	private static ItemBean getItemsFromRS(ResultSet rs) {
