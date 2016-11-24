@@ -24,6 +24,13 @@
 		<p>Email: ${restaurant.email}</p>
 		<p>Phone: ${restaurant.phone}</p>
 		<p>Account: ${restaurant.account}</p>
+
+		<form method="get" action="sManageMenus">
+			<input type="hidden" name="action" value="managemenus"> 
+			<input type="hidden" name="restaurantid" value="${restaurant.id}">
+			<input type="submit" value="Manage menus">
+		</form>
+
 	</c:forEach>
 </body>
 </html>
