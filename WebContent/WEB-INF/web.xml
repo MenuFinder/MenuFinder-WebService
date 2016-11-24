@@ -20,4 +20,37 @@
     <url-pattern>/JSPRestaurantDashboard</url-pattern>
     <url-pattern>/jRestaurantDashboard</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>JSPManageMenus</display-name>
+    <servlet-name>JSPManageMenus</servlet-name>
+    <jsp-file>/JSPManageMenus.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JSPManageMenus</servlet-name>
+    <url-pattern>/JSPManageMenus</url-pattern>
+    <url-pattern>/jManageMenus</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>JSPAddMenu</display-name>
+    <servlet-name>JSPAddMenu</servlet-name>
+    <jsp-file>/JSPAddMenu.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JSPAddMenu</servlet-name>
+    <url-pattern>/JSPAddMenu</url-pattern>
+    <url-pattern>/jAddMenu</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>JSPAddItem</display-name>
+    <servlet-name>JSPAddItem</servlet-name>
+    <jsp-file>/JSPAddItem.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JSPAddItem</servlet-name>
+    <url-pattern>/JSPAddItem</url-pattern>
+    <url-pattern>/jAddItem</url-pattern>
+  </servlet-mapping>
 </web-app>
