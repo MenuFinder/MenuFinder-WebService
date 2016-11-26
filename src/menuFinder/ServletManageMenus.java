@@ -1,6 +1,7 @@
 package menuFinder;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -35,20 +36,12 @@ public class ServletManageMenus extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		HttpSession session = request.getSession(true);
-		try {
-			ServletContext context = getServletContext();
-			RequestDispatcher rd;
-			if (request.getParameter("action").equalsIgnoreCase("addmenu")) {
-				rd = context.getRequestDispatcher("/jAddMenu");
-			} else {
-				session.setAttribute("menus", MenuBean.getMenusOfRestaurant(Long.parseLong(request.getParameter("restaurantid"))));
-				rd = context.getRequestDispatcher("/jManageMenus");
-			}
-			rd.forward(request, response);
-		} catch (Exception ex) {
-			ex.printStackTrace();
+		if (request.getParameter("action").equalsIgnoreCase("addmenu")) {
+			showAddMenuDialog(request, response, Long.parseLong(request.getParameter("restaurantid")));
+		} else if(request.getParameter("action").equalsIgnoreCase("editmenu")){ 
+			showEditMenuDialog(request, response, Long.parseLong(request.getParameter("menuid")));
+		} else {
+			showRestaurantMenus(request, response, Long.parseLong(request.getParameter("restaurantid")));
 		}
 	}
 
@@ -58,17 +51,85 @@ public class ServletManageMenus extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// doGet(request, response);
-
+		if (request.getParameter("action").equalsIgnoreCase("addmenu")) {
+			addMenu(request, response);
+		} else if(request.getParameter("action").equalsIgnoreCase("editmenu")){
+			System.out.println("menuid " + request.getParameter("menuid"));
+			editMenu(request, response);
+		} else if(request.getParameter("action").equalsIgnoreCase("deletemenu")){
+			deleteMenu(request, response);
+		}
+	}
+	
+	private void addMenu(HttpServletRequest request, HttpServletResponse response) {
 		String name = request.getParameter("name");
 		System.out.println("Creating menu: " + name);
-		long restaurant = new Long(request.getParameter("restaurant"));
+		long restaurant = Long.parseLong(request.getParameter("restaurantid"));
+		String description = request.getParameter("description");
 		Double price = new Double(request.getParameter("price"));
 		Double score = new Double(request.getParameter("score"));
-		MenuBean r = new MenuBean(restaurant, name, request.getParameter("description"), price, score);
+		MenuBean r = new MenuBean(restaurant, name, description, price, score);
 		r.save();
-		doGet(request, response);
+		showRestaurantMenus(request, response, restaurant);
 	}
 
+	private void showRestaurantMenus(HttpServletRequest request, HttpServletResponse response, long restaurantId) {
+		try {
+			HttpSession session = request.getSession(true);
+			session.setAttribute("menus", MenuBean.getMenusOfRestaurant(restaurantId));
+			session.setAttribute("restaurantid", restaurantId);
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/jManageMenus");
+			rd.forward(request, response);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	private void showAddMenuDialog(HttpServletRequest request, HttpServletResponse response, long restaurantId) {
+		try {
+			HttpSession session = request.getSession(true);
+			session.setAttribute("restaurantid", restaurantId);
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/jAddMenu");
+			rd.forward(request, response);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	private void showEditMenuDialog(HttpServletRequest request, HttpServletResponse response, long menuId) {
+		ResultSet m;
+		try {
+			HttpSession session = request.getSession(true);
+			session.setAttribute("menuid", menuId);
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/jEditMenu");
+			rd.forward(request, response);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	private void editMenu(HttpServletRequest request, HttpServletResponse response) {
+		long menuid = Long.parseLong(request.getParameter("menuid"));
+		String name = request.getParameter("name");
+		long restaurant = Long.parseLong(request.getParameter("restaurantid"));
+		String description = request.getParameter("description");
+		Double price = new Double(request.getParameter("price"));
+		Double score = new Double(request.getParameter("score"));
+		MenuBean r = new MenuBean(menuid, restaurant, name, description, price, score);
+		r.save();
+		showRestaurantMenus(request, response, restaurant);
+	}
+	
+	private void deleteMenu(HttpServletRequest request, HttpServletResponse response) {
+		long menuid = Long.parseLong(request.getParameter("menuid"));
+		System.out.println("Borrando menu: " +menuid );
+		String name = request.getParameter("name");
+		long restaurant = Long.parseLong(request.getParameter("restaurantid"));
+		String description = request.getParameter("description");
+		Double price = new Double(request.getParameter("price"));
+		Double score = new Double(request.getParameter("score"));
+		MenuBean r = new MenuBean(menuid,restaurant, name, description, price, score);
+		r.delete();
+		showRestaurantMenus(request, response, restaurant);
+	}
 }
