@@ -105,14 +105,14 @@ public class MenuBean extends Bean {
 				+ name + "', '" + description + "', " + price + ", " + score + ")";
 	}
 
-	public static MenuBean getRestaurantById(long id) {
+	public static MenuBean getMenuById(long id) {
 		try {
 			DBManager db = DBManager.getInstance();
 			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE id = " + id);
 			rs.next();
 			return getMenuFromRS(rs);
 		} catch (SQLException ex) {
-			System.err.println("Error retrieving menus with id: '" + id + "'.");
+			System.err.println("Error retrieving menu with id: '" + id + "'.");
 			ex.printStackTrace();
 			return null;
 		}
