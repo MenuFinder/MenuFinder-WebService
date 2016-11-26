@@ -147,7 +147,7 @@ public class ItemBean extends Bean {
 				if (!itemsCategory.containsKey(category)) {
 					itemsCategory.put(category, new ArrayList<ItemBean>());
 				}
-				itemsCategory.get(category).add(getIteamtById(rs.getLong("itemid")));
+				itemsCategory.get(category).add(getItemById(rs.getLong("itemid")));
 			}
 		} catch (SQLException ex) {
 			System.err.println("Error retrieving item list of menu '" + menuId + "'.");
