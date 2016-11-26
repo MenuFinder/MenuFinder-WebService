@@ -53,4 +53,37 @@
     <url-pattern>/JSPAddItem</url-pattern>
     <url-pattern>/jAddItem</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>JSPManageItems</display-name>
+    <servlet-name>JSPManageItems</servlet-name>
+    <jsp-file>/JSPManageItems.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JSPManageItems</servlet-name>
+    <url-pattern>/JSPManageItems</url-pattern>
+    <url-pattern>/jManageItems</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>JSPEditMenu</display-name>
+    <servlet-name>JSPEditMenu</servlet-name>
+    <jsp-file>/JSPEditMenu.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JSPEditMenu</servlet-name>
+    <url-pattern>/JSPEditMenu</url-pattern>
+    <url-pattern>/jEditMenu</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>JSPEditItem</display-name>
+    <servlet-name>JSPEditItem</servlet-name>
+    <jsp-file>/JSPEditItem.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JSPEditItem</servlet-name>
+    <url-pattern>/JSPEditItem</url-pattern>
+    <url-pattern>/jEditItem</url-pattern>
+  </servlet-mapping>
 </web-app>

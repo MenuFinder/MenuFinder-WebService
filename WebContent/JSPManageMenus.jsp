@@ -13,11 +13,40 @@
 <title>Menu Finder - Manage Menu</title>
 </head>
 <body>
+<%
+	long restaurantId =(long) session.getAttribute("restaurantid");
+%>
+<form method="get" action="sManageMenus">
+	<input type="hidden" name="action" value="addmenu"> 
+	<input type="hidden" name="restaurantid" value="<%=restaurantId%>">
+	<input type="submit" value="Add menu">
+</form>
 	<c:forEach var="menu" items="${menus}">
 		<h2>${menu.name}</h2>
 		<p>Description: ${menu.description}</p>
 		<p>Price: ${menu.price}</p>
 		<p>Score: ${menu.score}</p>
+		
+		<form method="get" action="sManageItems">
+			<input type="hidden" name="action" value="manageitems"> 
+			<input type="hidden" name="restaurantid" value="${menu.restaurant}">
+			<input type="submit" value="Manage items">
+		</form>
+		<form method="get" action="sManageMenus">
+			<input type="hidden" name="action" value="editmenu"> 
+			<input type="hidden" name="menuid" value="${menu.id}">
+			<input type="submit" value="Edit menu">
+		</form>
+		<form method="post" action="sManageMenus">
+			<input type="hidden" name="action" value="deletemenu"> 
+			<input type="hidden" name="menuid" value="${menu.id}"> 
+			<input type="hidden" name="name" value="${menu.name}"> 
+			<input type="hidden" name="description" value="${menu.description}"> 
+			<input type="hidden" name="price" value="${menu.price}"> 
+			<input type="hidden" name="score" value="${menu.score}"> 
+			<input type="hidden" name="restaurantid" value="${menu.restaurant}">
+			<input type="submit" value="Delete menu">
+		</form>
 	</c:forEach>
 </body>
 </html>

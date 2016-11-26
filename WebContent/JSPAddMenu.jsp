@@ -1,10 +1,11 @@
+<%@page import="database.RestaurantBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Menu Finder - Add Menu</title>
 </head>
 <body>
 	<h1>Create Menu</h1>
@@ -21,9 +22,9 @@
 		<p>
 			Score: <input type="text" name="score">
 		</p>
-		
+		<input type="hidden" name="restaurantid" value="${restaurantid}">
+		<input type="hidden" name="action" value="addmenu">
 		<br> <input type="submit" value="Register menu">
-		<br> <input type="submit" value="Delete menu">
 	</form>
 </body>
 </html>
