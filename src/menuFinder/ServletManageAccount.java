@@ -37,12 +37,23 @@ public class ServletManageAccount extends HttpServlet {
 			showAddAccountDialog(request, response);
 		} else if (request.getParameter("action").equalsIgnoreCase("logout")) {
 			logout(request, response);
-		} 
+		} else if (request.getParameter("action").equalsIgnoreCase("login")) {
+			showLoginDialog(request, response);
+		}
 	}
 	
 	private void showAddAccountDialog(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/jAccount");
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/jAddAccount");
+			rd.forward(request, response);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	private void showLoginDialog(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/jLogin");
 			rd.forward(request, response);
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -63,13 +74,18 @@ public class ServletManageAccount extends HttpServlet {
 
 	private void login(HttpServletRequest request, HttpServletResponse response) {
 		//ServletManageRestaurant list = new ServletManageRestaurant();
-		String accountId = request.getParameter("accountid");
-		String password = request.getParameter("password");
-		Boolean r = AccountBean.isValidLogin(accountId, password);
-		if(r)
-			showAccountRestaurants(request, response, request.getParameter("accountid"));
-		else
-			System.out.println("Invalid password");
+		try{
+			String accountId = request.getParameter("accountid");
+			String password = request.getParameter("password");
+			Boolean r = AccountBean.isValidLogin(accountId, password);
+			if(r)
+				showAccountRestaurants(request, response, request.getParameter("accountid"));
+			else
+				response.sendRedirect("index.html");
+				//System.out.println("Invalid password");
+		}  catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void logout(HttpServletRequest request, HttpServletResponse response) {
