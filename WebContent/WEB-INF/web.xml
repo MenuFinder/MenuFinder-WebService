@@ -11,17 +11,6 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>JSPRestaurantDashboard</display-name>
-    <servlet-name>JSPRestaurantDashboard</servlet-name>
-    <jsp-file>/JSPRestaurantDashboard.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>JSPRestaurantDashboard</servlet-name>
-    <url-pattern>/JSPRestaurantDashboard</url-pattern>
-    <url-pattern>/jRestaurantDashboard</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>JSPManageMenus</display-name>
     <servlet-name>JSPManageMenus</servlet-name>
     <jsp-file>/JSPManageMenus.jsp</jsp-file>
@@ -96,5 +85,38 @@
     <servlet-name>JSPManageMenuItems</servlet-name>
     <url-pattern>/JSPManageMenuItems</url-pattern>
     <url-pattern>/jManageMenuItems</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>JSPAddRestaurant</display-name>
+    <servlet-name>JSPAddRestaurant</servlet-name>
+    <jsp-file>/JSPAddRestaurant.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JSPAddRestaurant</servlet-name>
+    <url-pattern>/JSPAddRestaurant</url-pattern>
+    <url-pattern>/jAddRestaurant</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>JSPManageRestaurants</display-name>
+    <servlet-name>JSPManageRestaurants</servlet-name>
+    <jsp-file>/JSPManageRestaurants.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JSPManageRestaurants</servlet-name>
+    <url-pattern>/JSPManageRestaurants</url-pattern>
+    <url-pattern>/jManageRestaurants</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>JSPEditRestaurant</display-name>
+    <servlet-name>JSPEditRestaurant</servlet-name>
+    <jsp-file>/JSPEditRestaurant.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JSPEditRestaurant</servlet-name>
+    <url-pattern>/JSPEditRestaurant</url-pattern>
+    <url-pattern>/jEditRestaurant</url-pattern>
   </servlet-mapping>
 </web-app>

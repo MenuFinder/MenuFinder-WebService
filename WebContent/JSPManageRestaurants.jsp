@@ -10,9 +10,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>Menu Finder - Restaurant Dashboard</title>
+<title>Menu Finder - My Restaurants</title>
 </head>
 <body>
+	<form method="get" action="sManageRestaurants">
+		<input type="hidden" name="action" value="addrestaurant"> 
+		<input type="hidden" name="accountid" value="${accountid}">
+		<input type="submit" value="Add restaurant">
+	</form>
 	<c:forEach var="restaurant" items="${restaurants}">
 		<h2>${restaurant.name}</h2>
 		<p>CIF: ${restaurant.cif}</p>
@@ -23,13 +28,27 @@
 		<p>Country: ${restaurant.country}</p>
 		<p>Email: ${restaurant.email}</p>
 		<p>Phone: ${restaurant.phone}</p>
-		<p>Account: ${restaurant.account}</p>
 
+		<form method="get" action="sManageRestaurants">
+			<input type="hidden" name="action" value="editrestaurant"> 
+			<input type="hidden" name="accountid" value="${accountid}">
+			<input type="hidden" name="restaurantid" value="${restaurant.id}">
+			<input type="submit" value="Edit restaurant">
+		</form>
+		<br>
+		<form method="post" action="sManageRestaurants">
+			<input type="hidden" name="action" value="deleterestaurant"> 
+			<input type="hidden" name="accountid" value="${accountid}">
+			<input type="hidden" name="restaurantid" value="${restaurant.id}">
+			<input type="submit" value="Delete restaurant">
+		</form>
+		<br>
 		<form method="get" action="sManageMenus">
 			<input type="hidden" name="action" value="managemenus"> 
 			<input type="hidden" name="restaurantid" value="${restaurant.id}">
 			<input type="submit" value="Manage menus">
 		</form>
+		<br>
 		<form method="get" action="sManageItems">
 			<input type="hidden" name="action" value="manageitems">
 			<input type="hidden" name="restaurantid" value="${restaurant.id}">
