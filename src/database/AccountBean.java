@@ -94,4 +94,17 @@ public class AccountBean extends Bean {
 		}
 	}
 
+	public static boolean isValidLogin(String id, String password) {
+		try {
+			DBManager db = DBManager.getInstance();
+			ResultSet rs = db.executeQuery(
+					"SELECT * FROM " + table + " WHERE id = '" + id + "' AND password = '" + password + "'");
+			rs.next();
+			rs.getString("id");
+			return true;
+		} catch (SQLException ex) {
+			return false;
+		}
+	}
+
 }
