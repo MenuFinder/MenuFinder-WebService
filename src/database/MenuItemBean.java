@@ -3,7 +3,7 @@ package database;
 public class MenuItemBean extends Bean {
 
 	private static final long serialVersionUID = 1L;
-	private static final String table = "menufinder.menuitem";
+	private static final String table = "menuitem";
 
 	private long menu;
 	private long item;
@@ -47,7 +47,7 @@ public class MenuItemBean extends Bean {
 	}
 
 	protected String getDeleteQuery() {
-		return "DELETE FROM " + table + " WHERE menu = " + menu + " item = " + item + " itemcategory = " + itemCategory;
+		return "DELETE FROM " + table + " WHERE menu = " + menu + " AND item = " + item + " AND itemcategory = " + itemCategory;
 	}
 
 	protected String getUpdateQuery() {
