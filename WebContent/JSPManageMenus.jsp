@@ -28,6 +28,11 @@
 		<p>Score: ${menu.score}</p>
 		
 		<form method="get" action="sManageMenus">
+			<input type="hidden" name="action" value="managemenuitems">
+			<input type="hidden" name="menuid" value="${menu.id}">
+			<input type="submit" value="Manage menu items">
+		</form>
+		<form method="get" action="sManageMenus">
 			<input type="hidden" name="action" value="editmenu"> 
 			<input type="hidden" name="menuid" value="${menu.id}">
 			<input type="submit" value="Edit menu">

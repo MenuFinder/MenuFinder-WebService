@@ -86,4 +86,15 @@
     <url-pattern>/JSPEditItem</url-pattern>
     <url-pattern>/jEditItem</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>JSPManageMenuItems</display-name>
+    <servlet-name>JSPManageMenuItems</servlet-name>
+    <jsp-file>/JSPManageMenuItems.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JSPManageMenuItems</servlet-name>
+    <url-pattern>/JSPManageMenuItems</url-pattern>
+    <url-pattern>/jManageMenuItems</url-pattern>
+  </servlet-mapping>
 </web-app>

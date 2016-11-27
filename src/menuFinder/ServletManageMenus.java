@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import database.RestaurantBean;
+import database.ItemBean;
 import database.MenuBean;
+import database.MenuItemBean;
 
 /**
  * Servlet implementation class ServletManageMenus
@@ -40,6 +42,8 @@ public class ServletManageMenus extends HttpServlet {
 			showAddMenuDialog(request, response, Long.parseLong(request.getParameter("restaurantid")));
 		} else if(request.getParameter("action").equalsIgnoreCase("editmenu")){ 
 			showEditMenuDialog(request, response, Long.parseLong(request.getParameter("menuid")));
+		} else if (request.getParameter("action").equalsIgnoreCase("managemenuitems")) {
+			showManageMenuItemsDialog(request, response, Long.parseLong(request.getParameter("menuid")));
 		} else {
 			showRestaurantMenus(request, response, Long.parseLong(request.getParameter("restaurantid")));
 		}
@@ -58,6 +62,10 @@ public class ServletManageMenus extends HttpServlet {
 			editMenu(request, response);
 		} else if(request.getParameter("action").equalsIgnoreCase("deletemenu")){
 			deleteMenu(request, response);
+		} else if(request.getParameter("action").equalsIgnoreCase("deletemenuitem")) {
+			deleteMenuItem(request, response);
+		} else if(request.getParameter("action").equalsIgnoreCase("addmenuitem")) {
+			addMenuItem(request, response);
 		}
 	}
 	
@@ -131,5 +139,37 @@ public class ServletManageMenus extends HttpServlet {
 		MenuBean r = new MenuBean(menuid,restaurant, name, description, price, score);
 		r.delete();
 		showRestaurantMenus(request, response, restaurant);
+	}
+
+	private void showManageMenuItemsDialog(HttpServletRequest request, HttpServletResponse response, long menuId) {
+		try {
+			HttpSession session = request.getSession(true);
+			session.setAttribute("menuid", menuId);
+			session.setAttribute("menuitems", ItemBean.getMenuItemsByCategory(menuId));
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/jManageMenuItems");
+			rd.forward(request, response);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	private void deleteMenuItem(HttpServletRequest request, HttpServletResponse response) {
+		long itemId =Long.parseLong(request.getParameter("itemid"));
+		long menuId = Long.parseLong(request.getParameter("menuid"));
+		long categoryId = Long.parseLong(request.getParameter("categoryid"));
+		System.out.println("Deleting item '" + itemId + "' of menu '" + menuId + "'." );
+		MenuItemBean mi = new MenuItemBean(menuId, itemId, categoryId);
+		mi.delete();
+		showManageMenuItemsDialog(request, response, menuId);
+	}
+
+	private void addMenuItem(HttpServletRequest request, HttpServletResponse response) {
+		long itemId =Long.parseLong(request.getParameter("itemid"));
+		long menuId = Long.parseLong(request.getParameter("menuid"));
+		long categoryId = Long.parseLong(request.getParameter("categoryid"));
+		System.out.println("Adding item '" + itemId + "' to menu '" + menuId + "'." );
+		MenuItemBean mi = new MenuItemBean(menuId, itemId, categoryId);
+		mi.save();
+		showManageMenuItemsDialog(request, response, menuId);
 	}
 }
