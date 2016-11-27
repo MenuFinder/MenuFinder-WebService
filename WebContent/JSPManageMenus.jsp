@@ -45,7 +45,7 @@
 			<input type="hidden" name="price" value="${menu.price}"> 
 			<input type="hidden" name="score" value="${menu.score}"> 
 			<input type="hidden" name="restaurantid" value="${menu.restaurant}">
-			<input type="submit" value="Delete menu">
+			<input type="submit" value="Delete menu" onclick="return confirm('Do you want to delete this menu?')">
 		</form>
 	</c:forEach>
 </body>

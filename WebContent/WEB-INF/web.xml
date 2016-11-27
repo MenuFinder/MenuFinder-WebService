@@ -119,4 +119,15 @@
     <url-pattern>/JSPEditRestaurant</url-pattern>
     <url-pattern>/jEditRestaurant</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>JSPAccount</display-name>
+    <servlet-name>JSPAccount</servlet-name>
+    <jsp-file>/JSPAccount.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JSPAccount</servlet-name>
+    <url-pattern>/JSPAccount</url-pattern>
+    <url-pattern>/jAccount</url-pattern>
+  </servlet-mapping>
 </web-app>

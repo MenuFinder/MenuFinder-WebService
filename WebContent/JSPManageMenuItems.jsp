@@ -35,7 +35,7 @@
 							<input type="hidden" name="itemid" value="${item.id}">
 							<input type="hidden" name="menuid" value="<%=menuId%>">
 							<input type="hidden" name="categoryid" value="${menuitem.key}">
-							<input type="submit" value="Delete item">
+							<input type="submit" value="Delete item" onclick="return confirm('Do you want to delete this item of this menu?')">
 						</form></td>
 				</tr>
 			</c:forEach>

@@ -18,6 +18,10 @@
 		<input type="hidden" name="accountid" value="${accountid}">
 		<input type="submit" value="Add restaurant">
 	</form>
+	<form method="get" action="sManageAccount">
+		<input type="hidden" name="action" value="logout">
+		<input type="submit" value="Log out">
+	</form>
 	<c:forEach var="restaurant" items="${restaurants}">
 		<h2>${restaurant.name}</h2>
 		<p>CIF: ${restaurant.cif}</p>
@@ -40,7 +44,7 @@
 			<input type="hidden" name="action" value="deleterestaurant"> 
 			<input type="hidden" name="accountid" value="${accountid}">
 			<input type="hidden" name="restaurantid" value="${restaurant.id}">
-			<input type="submit" value="Delete restaurant">
+			<input type="submit" value="Delete restaurant" onclick="return confirm('Do you want to delete this restaurant?')">
 		</form>
 		<br>
 		<form method="get" action="sManageMenus">
