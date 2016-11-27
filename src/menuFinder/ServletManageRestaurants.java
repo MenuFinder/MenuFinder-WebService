@@ -3,7 +3,6 @@ package menuFinder;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,8 +54,14 @@ public class ServletManageRestaurants extends HttpServlet {
 	}
 
 	private void showEditRestaurantDialog(HttpServletRequest request, HttpServletResponse response, long restaurantId) {
-		// TODO Auto-generated method stub
-
+		try {
+			HttpSession session = request.getSession(true);
+			session.setAttribute("restaurant", RestaurantBean.getRestaurantById(restaurantId));
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/jEditRestaurant");
+			rd.forward(request, response);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	private void showAccountRestaurants(HttpServletRequest request, HttpServletResponse response, String accountId) {
@@ -98,13 +103,23 @@ public class ServletManageRestaurants extends HttpServlet {
 	}
 
 	private void editRestaurant(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+		String name = request.getParameter("name");
+		System.out.println("Updating restaurant: " + name);
+		RestaurantBean r = new RestaurantBean(Long.parseLong(request.getParameter("id")), name,
+				request.getParameter("cif"), request.getParameter("address"), request.getParameter("city"),
+				request.getParameter("postalcode"), request.getParameter("state"), request.getParameter("country"),
+				request.getParameter("email"), request.getParameter("phone"), request.getParameter("accountid"));
+		r.save();
+		showAccountRestaurants(request, response, request.getParameter("accountid"));
 	}
 
 	private void deleteRestaurant(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+		long restaurantId = Long.parseLong(request.getParameter("restaurantid"));
+		System.out.println("Deleting restaurant: " + restaurantId);
+		RestaurantBean r = new RestaurantBean();
+		r.setId(restaurantId);
+		r.delete();
+		showAccountRestaurants(request, response, request.getParameter("accountid"));
 	}
 
 }
