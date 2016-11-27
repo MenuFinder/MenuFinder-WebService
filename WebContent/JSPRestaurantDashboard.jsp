@@ -30,6 +30,11 @@
 			<input type="hidden" name="restaurantid" value="${restaurant.id}">
 			<input type="submit" value="Manage menus">
 		</form>
+		<form method="get" action="sManageItems">
+			<input type="hidden" name="action" value="manageitems">
+			<input type="hidden" name="restaurantid" value="${restaurant.id}">
+			<input type="submit" value="Manage items">
+		</form>
 
 	</c:forEach>
 </body>

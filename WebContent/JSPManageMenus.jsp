@@ -27,11 +27,6 @@
 		<p>Price: ${menu.price}</p>
 		<p>Score: ${menu.score}</p>
 		
-		<form method="get" action="sManageItems">
-			<input type="hidden" name="action" value="manageitems"> 
-			<input type="hidden" name="restaurantid" value="${menu.restaurant}">
-			<input type="submit" value="Manage items">
-		</form>
 		<form method="get" action="sManageMenus">
 			<input type="hidden" name="action" value="editmenu"> 
 			<input type="hidden" name="menuid" value="${menu.id}">
