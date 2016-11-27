@@ -159,14 +159,14 @@ public class RestaurantBean extends Bean {
 
 	protected String getUpdateQuery() {
 		return "UPDATE " + table + " SET name = '" + name + "', cif = '" + cif + "', address = '" + address
-				+ "', city = '" + city + "', postalcode = " + postalCode + ", state = '" + state + "', country = '"
-				+ country + "', email = '" + email + "', phone '" + phone + "' WHERE id = " + id;
+				+ "', city = '" + city + "', postalcode = '" + postalCode + "', state = '" + state + "', country = '"
+				+ country + "', email = '" + email + "', phone = '" + phone + "' WHERE id = " + id;
 	}
 
 	protected String getInsertQuery() {
 		return "INSERT INTO " + table + " (name, cif, address, city, " + "postalcode, state, country, "
-				+ "email, phone, account) VALUES ('" + name + "', '" + cif + "', '" + address + "', '" + city + "', "
-				+ postalCode + ", '" + state + "', '" + country + "', '" + email + "', '" + phone + "', '" + account
+				+ "email, phone, account) VALUES ('" + name + "', '" + cif + "', '" + address + "', '" + city + "', '"
+				+ postalCode + "', '" + state + "', '" + country + "', '" + email + "', '" + phone + "', '" + account
 				+ "')";
 	}
 
