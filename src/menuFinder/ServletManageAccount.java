@@ -82,7 +82,7 @@ public class ServletManageAccount extends HttpServlet {
 		System.out.println("Creating account: " + accountid);
 		String password = request.getParameter("password");
 		String type = request.getParameter("type");
-		AccountBean a = new AccountBean(accountid, password, type);
+		AccountBean a = new AccountBean(accountid, password, type, true);
 		a.save();
 		showAccountRestaurants(request, response, request.getParameter("accountid"));
 	}

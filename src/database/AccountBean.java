@@ -16,27 +16,20 @@ public class AccountBean extends Bean {
 		super();
 	}
 
-	public AccountBean(String password, String type) {
-		super();
-		this.password = password;
-		this.type = type;
-		isNewRecord = true;
-	}
-
-	public AccountBean(String id, String password, String type) {
+	public AccountBean(String id, String password, String type, boolean isNewRecord) {
 		super();
 		this.id = id;
 		this.password = password;
 		this.type = type;
-		isNewRecord = false;
+		this.isNewRecord = isNewRecord;
 	}
 
 	public String getId() {
 		return id;
 	}
 
-	public void setId(String id) {
-		isNewRecord = false;
+	public void setId(String id, boolean isNewRecord) {
+		this.isNewRecord = isNewRecord;
 		this.id = id;
 	}
 
@@ -68,12 +61,12 @@ public class AccountBean extends Bean {
 
 	@Override
 	protected String getInsertQuery() {
-		return "INSERT INTO " + table + " (password, type) VALUES ('" + password + "', '" + type + "')";
+		return "INSERT INTO " + table + " (id, password, type) VALUES ('" + id + "', '" + password + "', '" + type + "')";
 	}
 
 	private static AccountBean getAccountFromRS(ResultSet rs) {
 		try {
-			return new AccountBean(rs.getString("id"), rs.getString("password"), rs.getString("type"));
+			return new AccountBean(rs.getString("id"), rs.getString("password"), rs.getString("type"), false);
 		} catch (SQLException e) {
 			System.err.println("Error retrieving bean.");
 			e.printStackTrace();
