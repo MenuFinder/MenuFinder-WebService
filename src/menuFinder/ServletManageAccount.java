@@ -73,8 +73,11 @@ public class ServletManageAccount extends HttpServlet {
 	}
 	
 	private void logout(HttpServletRequest request, HttpServletResponse response) {
-		showAccountRestaurants(request, response, request.getParameter("accountid"));
-		
+		try {
+			response.sendRedirect("index.html");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void addaccount(HttpServletRequest request, HttpServletResponse response) {
