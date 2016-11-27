@@ -121,13 +121,24 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>JSPAccount</display-name>
-    <servlet-name>JSPAccount</servlet-name>
-    <jsp-file>/JSPAccount.jsp</jsp-file>
+    <display-name>JSPAddAccount</display-name>
+    <servlet-name>JSPAddAccount</servlet-name>
+    <jsp-file>/JSPAddAccount.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
-    <servlet-name>JSPAccount</servlet-name>
-    <url-pattern>/JSPAccount</url-pattern>
-    <url-pattern>/jAccount</url-pattern>
+    <servlet-name>JSPAddAccount</servlet-name>
+    <url-pattern>/JSPAddAccount</url-pattern>
+    <url-pattern>/jAddAccount</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>JSPLogin</display-name>
+    <servlet-name>JSPLogin</servlet-name>
+    <jsp-file>/JSPLogin.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JSPLogin</servlet-name>
+    <url-pattern>/JSPLogin</url-pattern>
+    <url-pattern>/jLogin</url-pattern>
   </servlet-mapping>
 </web-app>
