@@ -135,19 +135,17 @@ public class ItemBean extends Bean {
 		return items;
 	}
 
-	public static Map<String, List<ItemBean>> getMenuItemsByCategory(long menuId) {
-		Map<String, List<ItemBean>> itemsCategory = new HashMap<String, List<ItemBean>>();
+	public static Map<Long, List<ItemBean>> getMenuItemsByCategory(long menuId) {
+		Map<Long, List<ItemBean>> itemsCategory = new HashMap<Long, List<ItemBean>>();
 		try {
 			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery(
-					"SELECT ic.name AS category, mi.item AS itemid FROM itemcategory ic, menuitem mi WHERE mi.menu = "
-							+ menuId + " AND ic.id = mi.itemcategory");
+			ResultSet rs = db.executeQuery("SELECT itemcategory, item FROM menuitem WHERE menu = " + menuId);
 			while (rs.next()) {
-				String category = rs.getString("category");
+				long category = rs.getLong("itemcategory");
 				if (!itemsCategory.containsKey(category)) {
 					itemsCategory.put(category, new ArrayList<ItemBean>());
 				}
-				itemsCategory.get(category).add(getItemById(rs.getLong("itemid")));
+				itemsCategory.get(category).add(getItemById(rs.getLong("item")));
 			}
 		} catch (SQLException ex) {
 			System.err.println("Error retrieving item list of menu '" + menuId + "'.");
