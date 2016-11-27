@@ -1,10 +1,7 @@
 package menuFinder;
 
 import java.io.IOException;
-import java.sql.ResultSet;
-
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import database.RestaurantBean;
 import database.ItemBean;
 import database.MenuBean;
 import database.MenuItemBean;
@@ -105,7 +101,6 @@ public class ServletManageMenus extends HttpServlet {
 	}
 	
 	private void showEditMenuDialog(HttpServletRequest request, HttpServletResponse response, long menuId) {
-		ResultSet m;
 		try {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("menuid", menuId);
