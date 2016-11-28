@@ -151,7 +151,7 @@ public class MenuBean extends Bean {
 	private static MenuBean getMenuFromRS(ResultSet rs) {
 		try {
 			return new MenuBean(rs.getLong("id"), rs.getLong("restaurant"), rs.getString("name"),
-					rs.getString("description"), rs.getDouble("price"), rs.getDouble("price"));
+					rs.getString("description"), rs.getDouble("price"), rs.getDouble("score"));
 		} catch (SQLException e) {
 			System.err.println("Error retrieving bean.");
 			e.printStackTrace();
