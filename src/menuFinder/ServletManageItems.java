@@ -61,8 +61,7 @@ public class ServletManageItems extends HttpServlet {
 		long restaurant = Long.parseLong(request.getParameter("restaurantid"));
 		String description = request.getParameter("description");
 		Double price = new Double(request.getParameter("price"));
-		Double score = new Double(request.getParameter("score"));
-		ItemBean i = new ItemBean(name, description, price, score, restaurant);
+		ItemBean i = new ItemBean(name, description, price, 0, restaurant);
 		i.save();
 		showRestaurantItems(request, response, restaurant);
 	}
@@ -107,8 +106,11 @@ public class ServletManageItems extends HttpServlet {
 		long restaurant = Long.parseLong(request.getParameter("restaurantid"));
 		String description = request.getParameter("description");
 		Double price = new Double(request.getParameter("price"));
-		Double score = new Double(request.getParameter("score"));
-		ItemBean i = new ItemBean(itemid, name, description, price, score, restaurant);
+		ItemBean i = ItemBean.getItemById(itemid);
+		i.setId(itemid);
+		i.setName(name);
+		i.setDescription(description);
+		i.setPrice(price);
 		i.save();
 		showRestaurantItems(request, response, restaurant);
 	}
