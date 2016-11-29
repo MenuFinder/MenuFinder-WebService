@@ -78,8 +78,12 @@ public class ServletManageAccount extends HttpServlet {
 			String accountId = request.getParameter("accountid");
 			String password = request.getParameter("password");
 			Boolean r = AccountBean.isValidLogin(accountId, password);
-			if(r)
+			if(r){
+				HttpSession session = request.getSession();
+				session.setAttribute("loggedUser", r);
+				System.out.println("Looged: " + session.getAttribute("loggedUser"));
 				showAccountRestaurants(request, response, request.getParameter("accountid"));
+			}
 			else
 				response.sendRedirect("index.html");
 				//System.out.println("Invalid password");
@@ -90,6 +94,8 @@ public class ServletManageAccount extends HttpServlet {
 	
 	private void logout(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			HttpSession session = request.getSession();
+			 session.invalidate();
 			response.sendRedirect("index.html");
 		} catch (IOException e) {
 			e.printStackTrace();
