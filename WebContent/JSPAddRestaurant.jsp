@@ -43,11 +43,10 @@
 	</div>
 	<div class="element-address"><label class="title">
 	</label><span class="addr1">
-	<input placeholder="Street Address" type="text" name="address" /><span class="icon-place"></span></span><span class="addr2">
+	<input placeholder="Street Address" type="text" name="address" /><span class="icon-place"></span></span><span class="city">
 	<input placeholder="City" type="text" name="city" /><span class="icon-place"></span></span><span class="state">
 		<input placeholder="State / Province / Region" type="text" name="state" /><span class="icon-place"></span></span><span class="zip">
-		<input placeholder="Postal / Zip Code" type="text" maxlength="15" name="postalcode" /><span class="icon-place"></span></span>
-		<div class="country">
+		<input placeholder="Postal / Zip Code" type="text" maxlength="15" name="postalcode" /><span class="icon-place"></span></span><div class="country">
 		<select name="country" >
 			<option selected="selected" value="" disabled="disabled" >--- Select a country ---</option>
 			<option value="United States">United States</option><option value="United Kingdom">United Kingdom</option>
