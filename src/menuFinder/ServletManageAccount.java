@@ -77,10 +77,10 @@ public class ServletManageAccount extends HttpServlet {
 		try{
 			String accountId = request.getParameter("accountid");
 			String password = request.getParameter("password");
-			Boolean r = AccountBean.isValidLogin(accountId, password);
-			if(r){
+			AccountBean loggedAccount = AccountBean.getValidLogin(accountId, password);
+			if(loggedAccount != null){
 				HttpSession session = request.getSession();
-				session.setAttribute("loggedUser", r);
+				session.setAttribute("loggedUser", loggedAccount);
 				System.out.println("Looged: " + session.getAttribute("loggedUser"));
 				showAccountRestaurants(request, response, request.getParameter("accountid"));
 			}
@@ -109,6 +109,8 @@ public class ServletManageAccount extends HttpServlet {
 		String type = request.getParameter("type");
 		AccountBean a = new AccountBean(accountid, password, type, true);
 		a.save();
+		HttpSession session = request.getSession();
+		session.setAttribute("loggedUser", a);
 		showAccountRestaurants(request, response, request.getParameter("accountid"));
 	}
 

@@ -1,5 +1,6 @@
 package database;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -90,6 +91,7 @@ public class AccountBean extends Bean {
 	public static boolean isValidLogin(String id, String password) {
 		try {
 			DBManager db = DBManager.getInstance();
+
 			ResultSet rs = db.executeQuery(
 					"SELECT * FROM " + table + " WHERE id = '" + id + "' AND password = '" + password + "'");
 			rs.next();
@@ -98,6 +100,31 @@ public class AccountBean extends Bean {
 		} catch (SQLException ex) {
 			return false;
 		}
+	}
+	
+	public static AccountBean getValidLogin(String id, String password){
+		AccountBean loggedAcc = new AccountBean();
+		
+		try
+		{
+			DBManager db = DBManager.getInstance();
+			PreparedStatement pst = db.getConnection().prepareStatement("SELECT * FROM " + table + " WHERE id=? AND password=?");
+	         pst.setString(1, id);
+	         pst.setString(2, password);
+	         ResultSet rs = pst.executeQuery();
+	         if(rs.next()){  
+	        	 loggedAcc.setId(rs.getString("id"),false);  
+	        	 loggedAcc.setPassword(rs.getString("password"));  	        	  
+	        	 loggedAcc.setType(rs.getString("type"));  	
+	        	 return loggedAcc;
+	            }  
+	         else
+	        	 return null;
+		}
+		catch(SQLException ex)
+		{
+			return null;
+		}				
 	}
 
 }
