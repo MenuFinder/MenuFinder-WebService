@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
-
 import javax.sql.DataSource;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -29,7 +27,10 @@ public class DBManager {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public PreparedStatement getPreparedStatement(String sql) throws SQLException {
+		return connection.prepareStatement(sql);
+	}
 	
 	public Connection getConnection() {
 		return connection;
