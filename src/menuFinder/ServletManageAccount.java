@@ -82,7 +82,7 @@ public class ServletManageAccount extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("loggedUser", loggedAccount);
 				System.out.println("Looged: " + session.getAttribute("loggedUser"));
-				showAccountRestaurants(request, response, request.getParameter("accountid"));
+				showAccountRestaurants(request, response);
 			}
 			else
 				response.sendRedirect("index.html");
@@ -111,13 +111,15 @@ public class ServletManageAccount extends HttpServlet {
 		a.save();
 		HttpSession session = request.getSession();
 		session.setAttribute("loggedUser", a);
-		showAccountRestaurants(request, response, request.getParameter("accountid"));
+		showAccountRestaurants(request, response);
 	}
 
-	private void showAccountRestaurants(HttpServletRequest request, HttpServletResponse response, String accountId){
+	private void showAccountRestaurants(HttpServletRequest request, HttpServletResponse response){
 		HttpSession session = request.getSession(true);
-		session.setAttribute("restaurants", RestaurantBean.getRestaurantsOfAccount(accountId));
-		session.setAttribute("accountid", accountId);
+		AccountBean loggedAccount = (AccountBean)request.getSession().getAttribute("loggedUser");
+		session.setAttribute("restaurants", RestaurantBean.getRestaurantsOfAccount(loggedAccount.getId()));
+		session.setAttribute("accountid", loggedAccount.getId());
+		
 		try {
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/jManageRestaurants");
 			rd.forward(request, response);

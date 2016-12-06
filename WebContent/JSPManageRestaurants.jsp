@@ -15,7 +15,6 @@
 <body>
 	<form method="get" action="sManageRestaurants">
 		<input type="hidden" name="action" value="addrestaurant"> 
-		<input type="hidden" name="accountid" value="${accountid}">
 		<input type="submit" value="Add restaurant">
 	</form>
 	<form method="get" action="sManageAccount">

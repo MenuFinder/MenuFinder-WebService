@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import database.AccountBean;
 import database.RestaurantBean;
 
 /**
@@ -34,18 +35,19 @@ public class ServletManageRestaurants extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (request.getParameter("action").equalsIgnoreCase("addrestaurant")) {
-			showAddRestaurantDialog(request, response, request.getParameter("accountid"));
+			showAddRestaurantDialog(request, response);
 		} else if (request.getParameter("action").equalsIgnoreCase("editrestaurant")) {
 			showEditRestaurantDialog(request, response, Long.parseLong(request.getParameter("restaurantid")));
 		} else {
-			showAccountRestaurants(request, response, request.getParameter("accountid"));
+			showAccountRestaurants(request, response);
 		}
 	}
 
-	private void showAddRestaurantDialog(HttpServletRequest request, HttpServletResponse response, String accountId) {
+	private void showAddRestaurantDialog(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			HttpSession session = request.getSession(true);
-			session.setAttribute("accountid", accountId);
+			AccountBean loggedAccount = (AccountBean)request.getSession().getAttribute("loggedUser");
+			session.setAttribute("accountid", loggedAccount.getId());
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/jAddRestaurant");
 			rd.forward(request, response);
 		} catch (Exception ex) {
@@ -64,10 +66,12 @@ public class ServletManageRestaurants extends HttpServlet {
 		}
 	}
 
-	private void showAccountRestaurants(HttpServletRequest request, HttpServletResponse response, String accountId) {
+	private void showAccountRestaurants(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession(true);
-		session.setAttribute("restaurants", RestaurantBean.getRestaurantsOfAccount(accountId));
-		session.setAttribute("accountid", accountId);
+		AccountBean loggedAccount = (AccountBean)request.getSession().getAttribute("loggedUser");
+		session.setAttribute("accountid", loggedAccount.getId());
+		session.setAttribute("restaurants", RestaurantBean.getRestaurantsOfAccount(loggedAccount.getId()));
+		session.setAttribute("accountid", loggedAccount.getId());
 		try {
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/jManageRestaurants");
 			rd.forward(request, response);
@@ -99,7 +103,7 @@ public class ServletManageRestaurants extends HttpServlet {
 				request.getParameter("country"), request.getParameter("email"), request.getParameter("phone"),
 				request.getParameter("accountid"));
 		r.save();
-		showAccountRestaurants(request, response, request.getParameter("accountid"));
+		showAccountRestaurants(request, response);
 	}
 
 	private void editRestaurant(HttpServletRequest request, HttpServletResponse response) {
@@ -110,7 +114,7 @@ public class ServletManageRestaurants extends HttpServlet {
 				request.getParameter("postalcode"), request.getParameter("state"), request.getParameter("country"),
 				request.getParameter("email"), request.getParameter("phone"), request.getParameter("accountid"));
 		r.save();
-		showAccountRestaurants(request, response, request.getParameter("accountid"));
+		showAccountRestaurants(request, response);
 	}
 
 	private void deleteRestaurant(HttpServletRequest request, HttpServletResponse response) {
@@ -119,7 +123,7 @@ public class ServletManageRestaurants extends HttpServlet {
 		RestaurantBean r = new RestaurantBean();
 		r.setId(restaurantId);
 		r.delete();
-		showAccountRestaurants(request, response, request.getParameter("accountid"));
+		showAccountRestaurants(request, response);
 	}
 
 }

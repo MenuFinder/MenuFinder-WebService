@@ -123,8 +123,9 @@ public class AccountBean extends Bean {
 		}
 		catch(SQLException ex)
 		{
-			return null;
-		}				
+			ex.printStackTrace();
+		}
+		return null;				
 	}
 
 }
