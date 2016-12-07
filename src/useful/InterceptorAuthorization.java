@@ -29,11 +29,13 @@ public class InterceptorAuthorization implements Filter {
 			newRequestPage.contains("Servlet")	||
 			newRequestPage.contains("css")	||
 			newRequestPage.contains("img")	||
+			newRequestPage.contains("webservice")	||
 			((HttpServletRequest) request).getSession().getAttribute("loggedUser") != null) {			        			    
 			chain.doFilter(request, response);
 		} else {
+			System.out.println("Teste " + newRequestPage);
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
-			httpResponse.sendRedirect("JSPLogin");
+			httpResponse.sendRedirect("JSPLogin");			
 		}
 
 	}
