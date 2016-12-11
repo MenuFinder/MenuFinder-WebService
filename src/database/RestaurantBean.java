@@ -58,6 +58,7 @@ public class RestaurantBean extends Bean {
 
 	public RestaurantBean() {
 		super();
+		isNewRecord = true;
 	}
 
 	public long getId() {

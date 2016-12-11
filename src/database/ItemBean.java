@@ -21,6 +21,7 @@ public class ItemBean extends Bean {
 
 	public ItemBean() {
 		super();
+		isNewRecord = true;
 	}
 
 	public ItemBean(long id, String name, String description, double price, double score, long restaurant) {

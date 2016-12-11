@@ -17,6 +17,7 @@ public class ItemRatingBean extends Bean {
 
 	public ItemRatingBean() {
 		super();
+		isNewRecord = true;
 	}
 
 	public ItemRatingBean(double score, String account, long item) {

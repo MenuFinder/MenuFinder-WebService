@@ -15,6 +15,7 @@ public class ItemCategoryBean extends Bean {
 
 	public ItemCategoryBean() {
 		super();
+		isNewRecord = true;
 	}
 
 	public ItemCategoryBean(long id, String name, String description) {

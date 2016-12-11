@@ -19,6 +19,7 @@ public class MenuBean extends Bean {
 
 	public MenuBean() {
 		super();
+		isNewRecord = true;
 	}
 
 	public MenuBean(long id, long restaurant, String name, String description, double price, double score) {
