@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 
 import database.AccountBean;
 import database.MenuBean;
+import database.RestaurantBean;
 
 
 
@@ -82,13 +83,13 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@DELETE	
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
-	@Path("/deleteMenu")
-	public String deleteMenu(MenuBean menu) {
+	@Path("/deleteMenu/{id}")
+	public String deleteMenu(@PathParam("id") long id) {
 		try {
-			MenuBean entity = new MenuBean(menu.getId(),menu.getRestaurant(), menu.getName(), menu.getDescription(),menu. getPrice(), menu.getScore());
+			MenuBean entity = MenuBean.getMenuById(id);
 			entity.delete();
 						
-			return "Menu deleted "+menu.getId() +" successfully!";
+			return "Menu "+id +" deleted  successfully!";
  
 		} catch (Exception e) {
  
@@ -110,6 +111,66 @@ public class MenuFinderWs implements IMenuFinderWS {
 		} catch (Exception e) {
  
 			return "Error trying to update the  Menu " + e.getMessage();
+		}
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("restaurant/{id}")
+	public RestaurantBean getRestaurantById(@PathParam("id") long restaurantId) {
+		return RestaurantBean.getRestaurantById(restaurantId);
+	}
+
+	@POST	
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/addRestaurant")
+	public String addNewRestaurant(RestaurantBean restaurant) {
+		try {			
+			restaurant.save();
+			return "Restaurant added successfully!";
+		} catch (Exception e) {
+			return "Error trying to add the new Restaurant " + e.getMessage();
+		}
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getAllRestaurants")
+	public List<RestaurantBean> getRestaurantes() {
+		return RestaurantBean.getAllBeans();
+	}
+
+	@DELETE	
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/deleteRestaurant/{id}")
+	public String deleteRestaurant(@PathParam("id") long restaurantId) {
+		try {
+			RestaurantBean entity = RestaurantBean.getRestaurantById(restaurantId);
+			entity.delete();
+						
+			return "Restaurant  "+restaurantId +" deleted successfully!";
+ 
+		} catch (Exception e) {
+ 
+			return "Error trying to delete the Restaurant " + e.getMessage();
+		}
+	}
+
+	@PUT	
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/updateRestaurant")
+	public String updateRestaurant(RestaurantBean restaurant) {
+		try {
+			restaurant.save();
+
+			return "Restaurant  "+restaurant.getId() +"  updated successfully!";
+ 
+		} catch (Exception e) {
+ 
+			return "Error trying to update the  Restaurant " + e.getMessage();
 		}
 	}
 }
