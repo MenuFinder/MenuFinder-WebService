@@ -47,10 +47,16 @@ public class MenuFinderWs implements IMenuFinderWS {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("menu/{id}")
+	@Path("restaurantMenus/{id}")
 	public List<MenuBean> getMenusByRestaurantId(@PathParam("id") long restaurantId) {
-		// TODO Auto-generated method stub
-		return null;
+		return MenuBean.getMenusOfRestaurant(restaurantId);
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getMenu/{id}")
+	public MenuBean getMenuById(@PathParam("id") long menuId) {
+		return MenuBean.getMenuById(menuId);
 	}
 	
 	@POST	
