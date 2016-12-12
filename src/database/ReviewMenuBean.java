@@ -20,8 +20,8 @@ public class ReviewMenuBean extends ReviewBean {
 		super(id, review, parentType, parentId, account);
 	}
 
-	public static List<ReviewBean> getReviewsOfRestaurant(long restaurantId) {
-		return getReviewsOfParent(parentType, restaurantId);
+	public static List<ReviewBean> getReviewsOfMenu(long menuId) {
+		return getReviewsOfParent(parentType, menuId);
 	}
 
 }
