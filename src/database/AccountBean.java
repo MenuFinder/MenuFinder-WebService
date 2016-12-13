@@ -12,6 +12,7 @@ public class AccountBean extends Bean {
 	private String id;
 	private String password;
 	private String type;
+	private String token;
 
 	public AccountBean() {
 		super();
@@ -50,6 +51,14 @@ public class AccountBean extends Bean {
 		this.type = type;
 	}
 
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
 	@Override
 	protected String getDeleteQuery() {
 		return "DELETE FROM " + table + " WHERE id = '" + id + "'";
@@ -57,17 +66,24 @@ public class AccountBean extends Bean {
 
 	@Override
 	protected String getUpdateQuery() {
-		return "UPDATE " + table + " SET password = '" + password + "', type = '" + type + "' WHERE id = '" + id + "'";
+		return "UPDATE " + table + " SET password = '" + password + "', type = '" + type + "', token = '" + token
+				+ "' WHERE id = '" + id + "'";
 	}
 
 	@Override
 	protected String getInsertQuery() {
-		return "INSERT INTO " + table + " (id, password, type) VALUES ('" + id + "', '" + password + "', '" + type + "')";
+		return "INSERT INTO " + table + " (id, password, type, token) VALUES ('" + id + "', '" + password + "', '"
+				+ type + "', '" + token + "')";
 	}
 
 	private static AccountBean getAccountFromRS(ResultSet rs) {
 		try {
-			return new AccountBean(rs.getString("id"), rs.getString("password"), rs.getString("type"), false);
+			AccountBean account = new AccountBean();
+			account.setId(rs.getString("id"), false);
+			account.setPassword(rs.getString("password"));
+			account.setType(rs.getString("type"));
+			account.setToken(rs.getString("token"));
+			return account;
 		} catch (SQLException e) {
 			System.err.println("Error retrieving bean.");
 			e.printStackTrace();
