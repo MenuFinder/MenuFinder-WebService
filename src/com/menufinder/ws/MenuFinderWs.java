@@ -20,6 +20,10 @@ import javax.ws.rs.core.Response;
 import database.AccountBean;
 import database.MenuBean;
 import database.RestaurantBean;
+import database.ReviewBean;
+import database.ReviewItemBean;
+import database.ReviewMenuBean;
+import database.ReviewRestaurantBean;
 
 
 
@@ -178,5 +182,69 @@ public class MenuFinderWs implements IMenuFinderWS {
  
 			return "Error trying to update the  Restaurant " + e.getMessage();
 		}
+	}
+
+	@Override
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/review/{id}")
+	public ReviewBean getReviewById(@PathParam("id")long reviewId) {
+		return ReviewBean.getReviewById(reviewId);
+	}
+
+	@Override
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/itemReviews/{id}")
+	public List<ReviewBean> getReviewsOfItem(@PathParam("id")long itemId) {
+		return ReviewItemBean.getReviewsOfItem(itemId);
+	}
+
+	@Override
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/menuReviews/{id}")
+	public List<ReviewBean> getReviewsOfMenu(@PathParam("id")long menuId) {
+		return ReviewMenuBean.getReviewsOfMenu(menuId);
+	}
+
+	@Override
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/restaurantReviews/{id}")
+	public List<ReviewBean> getReviewsOfRestaurant(@PathParam("id")long restaurantId) {
+		return ReviewRestaurantBean.getReviewsOfRestaurant(restaurantId);
+	}
+
+	@Override
+	@PUT
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/updateReview")
+	public String updateReview(ReviewBean review) {
+		review.save();
+		return "Review: "+ review.getId() + " updated successfully!";
+	}
+
+	@Override
+	@DELETE
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/deleteReview/{id}")
+	public String deleteReview(@PathParam("id")long reviewId) {
+		ReviewBean review = new ReviewBean();
+		review.setId(reviewId);
+		review.delete();
+		return "Review: "+ reviewId + " deleted successfully!";
+	}
+
+	@Override
+	@POST
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/addReview")
+	public String addReview(ReviewBean review) {
+		review.save();
+		return "Review added successfully!";
 	}
 }

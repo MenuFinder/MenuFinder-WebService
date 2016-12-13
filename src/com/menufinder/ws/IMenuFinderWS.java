@@ -8,6 +8,7 @@ import javax.ws.rs.PathParam;
 import database.AccountBean;
 import database.MenuBean;
 import database.RestaurantBean;
+import database.ReviewBean;
 
 
 
@@ -25,5 +26,13 @@ public interface IMenuFinderWS {
 	public List<RestaurantBean> getRestaurantes();
 	public String deleteRestaurant(@PathParam("id") long restaurantId);
 	public String updateRestaurant(RestaurantBean restaurant);
+
+	public ReviewBean getReviewById(@PathParam("id")long reviewId);
+	public List<ReviewBean> getReviewsOfItem(@PathParam("id")long itemId);
+	public List<ReviewBean> getReviewsOfMenu(@PathParam("id")long menuId);
+	public List<ReviewBean> getReviewsOfRestaurant(@PathParam("id")long restaurantId);
+	public String updateReview(ReviewBean review);
+	public String deleteReview(@PathParam("id")long reviewId);
+	public String addReview(ReviewBean review);
 	
 }
