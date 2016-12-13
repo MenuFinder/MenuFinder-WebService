@@ -112,8 +112,8 @@ public class ReviewBean extends Bean {
 		List<ReviewBean> reviews = new ArrayList<>();
 		try {
 			DBManager db = DBManager.getInstance();
-			ResultSet rs = db
-					.executeQuery("SELECT * FROM " + table + " WHERE parent_type = '" + parentType + "', " + parentId);
+			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE parent_type = '" + parentType
+					+ "' AND parent_id = " + parentId);
 			while (rs.next()) {
 				reviews.add(getReviewBeanFromRS(rs));
 			}
