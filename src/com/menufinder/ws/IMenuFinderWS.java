@@ -1,11 +1,13 @@
 package com.menufinder.ws;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.PathParam;
 
 import database.AccountBean;
+import database.ItemBean;
 import database.MenuBean;
 import database.RestaurantBean;
 import database.ReviewBean;
@@ -34,5 +36,12 @@ public interface IMenuFinderWS {
 	public String updateReview(ReviewBean review);
 	public String deleteReview(@PathParam("id")long reviewId);
 	public String addReview(ReviewBean review);
+
+	public String updateItem(ItemBean item);
+	public String deleteItem(@PathParam("id")long itemId);
+	public String addItem(ItemBean item);
+	public ItemBean getItemById(@PathParam("id")long itemId);
+	public List<ItemBean> getRestaurantItems(@PathParam("id")long restaurantId);
+	public Map<Long, List<ItemBean>> getMenuItemsByCategory(@PathParam("id")long menuId);
 	
 }

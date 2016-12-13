@@ -2,7 +2,7 @@ package com.menufinder.ws;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Map;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.Consumes;
@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import database.AccountBean;
+import database.ItemBean;
 import database.MenuBean;
 import database.RestaurantBean;
 import database.ReviewBean;
@@ -246,5 +247,61 @@ public class MenuFinderWs implements IMenuFinderWS {
 	public String addReview(ReviewBean review) {
 		review.save();
 		return "Review added successfully!";
+	}
+
+	@Override
+	@PUT
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/updateItem")
+	public String updateItem(ItemBean item) {
+		item.save();
+		return "Item: "+ item.getId() + " updated successfully!";
+	}
+
+	@Override
+	@DELETE
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/deleteItem/{id}")
+	public String deleteItem(@PathParam("id")long itemId) {
+		ItemBean item = new ItemBean();
+		item.setId(itemId);
+		item.delete();
+		return "Item: "+ itemId + " deleted successfully!";
+	}
+
+	@Override
+	@POST
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/addItem")
+	public String addItem(ItemBean item) {
+		item.save();
+		return "Item added successfully!";
+	}
+
+	@Override
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/item/{id}")
+	public ItemBean getItemById(@PathParam("id")long itemId) {
+		return ItemBean.getItemById(itemId);
+	}
+
+	@Override
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/restaurantItems/{id}")
+	public List<ItemBean> getRestaurantItems(@PathParam("id")long restaurantId) {
+		return ItemBean.getRestaurantItems(restaurantId);
+	}
+
+	@Override
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/menuItemsByCategory/{id}")
+	public Map<Long, List<ItemBean>> getMenuItemsByCategory(@PathParam("id")long menuId) {
+		return ItemBean.getMenuItemsByCategory(menuId);
 	}
 }
