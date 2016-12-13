@@ -230,4 +230,20 @@ public class RestaurantBean extends Bean {
 		}
 	}
 
+	public static List<RestaurantBean> getSubscribedRestaurantsOfAccount(String accountId) {
+		List<RestaurantBean> restaurants = new ArrayList<>();
+		try {
+			DBManager db = DBManager.getInstance();
+			ResultSet rs = db.executeQuery("SELECT r.* FROM " + table + " r, " + AccountSubscriptionBean.getTable()
+				+ " us WHERE us.account = '" + accountId + "' AND r.id = us.restaurant");
+			while (rs.next()) {
+				restaurants.add(getRestaurantFromRS(rs));
+			}
+		} catch (SQLException ex) {
+			System.err.println("Error retrieving restaurants list of account '" + accountId + "'.");
+			ex.printStackTrace();
+		}
+		return restaurants;
+	}
+
 }
