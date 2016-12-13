@@ -18,8 +18,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import database.AccountBean;
+import database.AccountSubscriptionBean;
 import database.ItemBean;
+import database.ItemCategoryBean;
+import database.ItemRatingBean;
 import database.MenuBean;
+import database.MenuItemBean;
 import database.RestaurantBean;
 import database.ReviewBean;
 import database.ReviewItemBean;
@@ -304,4 +308,164 @@ public class MenuFinderWs implements IMenuFinderWS {
 	public Map<Long, List<ItemBean>> getMenuItemsByCategory(@PathParam("id")long menuId) {
 		return ItemBean.getMenuItemsByCategory(menuId);
 	}
+	
+	@Override
+	@POST
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/addMenuItem")
+	public String addMenuItem(MenuItemBean menuItem) {
+		menuItem.save();
+		return "Item added successfully to the menu!";
+	}
+
+	@Override
+	@DELETE	
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/deleteItemCategory")
+	public String deleteMenuItem(MenuItemBean menuItem) {
+		try {
+			menuItem.delete();
+						
+			return "Item  "+ menuItem.getItem() +" deleted successfully from menu " + menuItem.getMenu() + " !";
+ 
+		} catch (Exception e) {
+ 
+			return "Error trying to delete the Item from Menu " + e.getMessage();
+		}
+	}
+
+	
+	@Override
+	@POST
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/addItemCategory")
+	public String addItemCategory(ItemCategoryBean itemCategory) {
+		itemCategory.save();
+		return "Category added successfully!";
+	}
+
+	@Override
+	@DELETE	
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/deleteItemCategory/{id}")
+	public String deleteItemCategory(@PathParam("id") long id) {
+		try {
+			ItemCategoryBean entity = ItemCategoryBean.getItemCategoryById(id);
+			entity.delete();
+						
+			return "Category  "+id +" deleted successfully!";
+ 
+		} catch (Exception e) {
+ 
+			return "Error trying to delete the Restaurant " + e.getMessage();
+		}
+	}
+
+	@Override
+	@PUT
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/updateItemCategory")
+	public String updateItemCategory(ItemCategoryBean itemCategory) {
+		itemCategory.save();
+		return "Category: "+ itemCategory.getId() + " updated successfully!";
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("itemCategory/{id}")
+	public ItemCategoryBean getItemCategoryById(@PathParam("id") long id) {
+		return ItemCategoryBean.getItemCategoryById(id);
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("itemCategories")
+	public List<ItemCategoryBean> getItemCategories() {		 
+		return ItemCategoryBean.getAllBeans(); 		
+	}
+
+	@Override
+	@PUT
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/updateItemRating")
+	public String updateItemRating(ItemRatingBean itemRating) {
+		itemRating.save();
+		return "Rating: "+ itemRating.getId() + " updated successfully!";
+	}
+
+	@Override
+	@DELETE	
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/deleteItemRating")
+	public String deleteItemRating(ItemRatingBean itemRating) {
+		try {
+			itemRating.delete();
+						
+			return "Rating  "+itemRating.getId() +" deleted successfully!";
+ 
+		} catch (Exception e) {
+ 
+			return "Error trying to delete the rating " + e.getMessage();
+		}
+	}
+
+	@Override
+	@POST
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/addItemCategory")
+	public String addItemRating(ItemRatingBean itemRating) {
+		itemRating.save();
+		return "Rating added successfully!";
+	}
+
+	@Override
+	@DELETE	
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/deleteAccountSubscription")
+	public String deleteAccountSubscription(AccountSubscriptionBean accountSubscription) {
+		try {
+			accountSubscription.delete();
+						
+			return "Feed of account "+ accountSubscription.getAccount() +" deleted successfully!";
+ 
+		} catch (Exception e) {
+ 
+			return "Error trying to delete the feed " + e.getMessage();
+		}
+	}
+
+	@Override
+	@POST
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/addAccountSubscription")
+	public String addAccountSubscription(AccountSubscriptionBean accountSubscription) {
+		accountSubscription.save();
+		return "Feed added successfully!";
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("itemRating/{id}")
+	public List<ItemRatingBean> getRatingsOfItem(long itemId) {
+		return ItemRatingBean.getRatingsOfItem(itemId);
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("itemRatingItem/{id}")
+	public double getItemRatingOfItem(long itemId) {
+		return ItemRatingBean.getItemRatingOfItem(itemId);
+	}
+	
+
 }
