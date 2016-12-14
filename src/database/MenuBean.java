@@ -106,16 +106,10 @@ public class MenuBean extends Bean {
 				+ name + "', '" + description + "', " + price + ", " + score + ")";
 	}
 
-	public static MenuBean getMenuById(long id) {
-		try {
-			ResultSet rs = select("SELECT * FROM " + table + " WHERE id = " + id);
-			rs.next();
-			return getMenuFromRS(rs);
-		} catch (SQLException ex) {
-			System.err.println("Error retrieving menu with id: '" + id + "'.");
-			ex.printStackTrace();
-			return null;
-		}
+	public static MenuBean getMenuById(long id) throws SQLException {
+		ResultSet rs = select("SELECT * FROM " + table + " WHERE id = " + id);
+		rs.next();
+		return getMenuFromRS(rs);
 	}
 
 	public static List<MenuBean> getAllBeans() {
@@ -146,15 +140,9 @@ public class MenuBean extends Bean {
 		return menus;
 	}
 
-	private static MenuBean getMenuFromRS(ResultSet rs) {
-		try {
-			return new MenuBean(rs.getLong("id"), rs.getLong("restaurant"), rs.getString("name"),
-					rs.getString("description"), rs.getDouble("price"), rs.getDouble("score"));
-		} catch (SQLException e) {
-			System.err.println("Error retrieving bean.");
-			e.printStackTrace();
-			return null;
-		}
+	private static MenuBean getMenuFromRS(ResultSet rs) throws SQLException {
+		return new MenuBean(rs.getLong("id"), rs.getLong("restaurant"), rs.getString("name"),
+				rs.getString("description"), rs.getDouble("price"), rs.getDouble("score"));
 	}
 
 }
