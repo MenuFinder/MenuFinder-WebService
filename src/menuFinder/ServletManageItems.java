@@ -113,12 +113,12 @@ public class ServletManageItems extends HttpServlet {
 		long restaurant = Long.parseLong(request.getParameter("restaurantid"));
 		String description = request.getParameter("description");
 		Double price = new Double(request.getParameter("price"));
-		ItemBean i = ItemBean.getItemById(itemid);
-		i.setId(itemid);
-		i.setName(name);
-		i.setDescription(description);
-		i.setPrice(price);
 		try {
+			ItemBean i = ItemBean.getItemById(itemid);
+			i.setId(itemid);
+			i.setName(name);
+			i.setDescription(description);
+			i.setPrice(price);
 			i.save();
 		} catch (SQLException e) {
 			System.err.println("Error updating item!");

@@ -319,7 +319,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/item/{id}")
 	public ItemBean getItemById(@PathParam("id")long itemId) {
-		return ItemBean.getItemById(itemId);
+		try {
+			return ItemBean.getItemById(itemId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ItemBean();
+		}
 	}
 
 	@Override
