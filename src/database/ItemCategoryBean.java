@@ -70,16 +70,10 @@ public class ItemCategoryBean extends Bean {
 		return "INSERT INTO " + table + " (name, description) VALUES ('" + name + "', '" + description + "')";
 	}
 
-	public static ItemCategoryBean getItemCategoryById(long id) {
-		try {
-			ResultSet rs = select("SELECT * FROM " + table + " WHERE id = " + id);
-			rs.next();
-			return getIteamCategoryFromRS(rs);
-		} catch (SQLException ex) {
-			System.err.println("Error retrieving itemCategories with id: '" + id + "'.");
-			ex.printStackTrace();
-			return null;
-		}
+	public static ItemCategoryBean getItemCategoryById(long id) throws SQLException {
+		ResultSet rs = select("SELECT * FROM " + table + " WHERE id = " + id);
+		rs.next();
+		return getIteamCategoryFromRS(rs);
 	}
 
 	public static List<ItemCategoryBean> getAllBeans() {
@@ -96,14 +90,8 @@ public class ItemCategoryBean extends Bean {
 		return itemCategories;
 	}
 
-	private static ItemCategoryBean getIteamCategoryFromRS(ResultSet rs) {
-		try {
-			return new ItemCategoryBean(rs.getLong("id"), rs.getString("name"), rs.getString("description"));
-		} catch (SQLException e) {
-			System.err.println("Error retrieving bean.");
-			e.printStackTrace();
-			return null;
-		}
+	private static ItemCategoryBean getIteamCategoryFromRS(ResultSet rs) throws SQLException {
+		return new ItemCategoryBean(rs.getLong("id"), rs.getString("name"), rs.getString("description"));
 	}
 	
 }
