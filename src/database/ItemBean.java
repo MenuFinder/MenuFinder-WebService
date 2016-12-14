@@ -110,8 +110,7 @@ public class ItemBean extends Bean {
 
 	public static ItemBean getItemById(long id) {
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE id = " + id);
+			ResultSet rs = select("SELECT * FROM " + table + " WHERE id = " + id);
 			rs.next();
 			return getItemsFromRS(rs);
 		} catch (SQLException ex) {
@@ -124,8 +123,7 @@ public class ItemBean extends Bean {
 	public static List<ItemBean> getRestaurantItems(long restaurantId) {
 		List<ItemBean> items = new ArrayList<>();
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE restaurant = " + restaurantId);
+			ResultSet rs = select("SELECT * FROM " + table + " WHERE restaurant = " + restaurantId);
 			while (rs.next()) {
 				items.add(getItemsFromRS(rs));
 			}
@@ -139,8 +137,7 @@ public class ItemBean extends Bean {
 	public static Map<Long, List<ItemBean>> getMenuItemsByCategory(long menuId) {
 		Map<Long, List<ItemBean>> itemsCategory = new HashMap<Long, List<ItemBean>>();
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT itemcategory, item FROM menuitem WHERE menu = " + menuId);
+			ResultSet rs = select("SELECT itemcategory, item FROM menuitem WHERE menu = " + menuId);
 			while (rs.next()) {
 				long category = rs.getLong("itemcategory");
 				if (!itemsCategory.containsKey(category)) {

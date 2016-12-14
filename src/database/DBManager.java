@@ -51,34 +51,20 @@ public class DBManager {
 		return (DataSource) new InitialContext().lookup(datasource);
 	}
 
-	protected void deleteBean(Bean m) {
-		try {
-			DBManager db = DBManager.getInstance();
-			db.executeUpdate(m.getDeleteQuery());
-		} catch (SQLException ex) {
-			System.err.println("Error deleting bean.");
-			ex.printStackTrace();
-		}
+	protected void deleteBean(Bean m) throws SQLException {
+		executeUpdate(m.getDeleteQuery());
 	}
 
-	protected void updateBean(Bean m) {
-		try {
-			DBManager db = DBManager.getInstance();
-			db.executeUpdate(m.getUpdateQuery());
-		} catch (SQLException ex) {
-			System.err.println("Error deleting bean.");
-			ex.printStackTrace();
-		}
+	protected void updateBean(Bean m) throws SQLException {
+		executeUpdate(m.getUpdateQuery());
 	}
 
-	protected void insertBean(Bean m) {
-		try {
-			DBManager db = DBManager.getInstance();
-			db.executeUpdate(m.getInsertQuery());
-		} catch (SQLException ex) {
-			System.err.println("Error inserting bean.");
-			ex.printStackTrace();
-		}
+	protected void insertBean(Bean m) throws SQLException {
+		executeUpdate(m.getInsertQuery());
+	}
+	
+	protected ResultSet getResultSet(String query) throws SQLException {
+		return executeQuery(query);
 	}
 
 }

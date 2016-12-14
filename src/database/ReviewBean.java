@@ -111,8 +111,7 @@ public class ReviewBean extends Bean {
 	protected static List<ReviewBean> getReviewsOfParent(String parentType, long parentId) {
 		List<ReviewBean> reviews = new ArrayList<>();
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE parent_type = '" + parentType
+			ResultSet rs = select("SELECT * FROM " + table + " WHERE parent_type = '" + parentType
 					+ "' AND parent_id = " + parentId);
 			while (rs.next()) {
 				reviews.add(getReviewBeanFromRS(rs));
@@ -126,8 +125,7 @@ public class ReviewBean extends Bean {
 
 	public static ReviewBean getReviewById(long id) {
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE id = " + id);
+			ResultSet rs = select("SELECT * FROM " + table + " WHERE id = " + id);
 			rs.next();
 			return getReviewBeanFromRS(rs);
 		} catch (SQLException ex) {

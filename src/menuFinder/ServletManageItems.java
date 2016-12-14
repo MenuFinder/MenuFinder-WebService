@@ -1,6 +1,8 @@
 package menuFinder;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,7 +64,12 @@ public class ServletManageItems extends HttpServlet {
 		String description = request.getParameter("description");
 		Double price = new Double(request.getParameter("price"));
 		ItemBean i = new ItemBean(name, description, price, 0, restaurant);
-		i.save();
+		try {
+			i.save();
+		} catch (SQLException e) {
+			System.err.println("Error creating item!");
+			e.printStackTrace();
+		}
 		showRestaurantItems(request, response, restaurant);
 	}
 
@@ -111,7 +118,12 @@ public class ServletManageItems extends HttpServlet {
 		i.setName(name);
 		i.setDescription(description);
 		i.setPrice(price);
-		i.save();
+		try {
+			i.save();
+		} catch (SQLException e) {
+			System.err.println("Error updating item!");
+			e.printStackTrace();
+		}
 		showRestaurantItems(request, response, restaurant);
 	}
 	
@@ -124,7 +136,12 @@ public class ServletManageItems extends HttpServlet {
 		Double price = new Double(request.getParameter("price"));
 		Double score = new Double(request.getParameter("score"));
 		ItemBean i = new ItemBean(itemid, name, description, price, score,restaurant);
-		i.delete();
+		try {
+			i.delete();
+		} catch (SQLException e) {
+			System.err.println("Error deleting item!");
+			e.printStackTrace();
+		}
 		showRestaurantItems(request, response, restaurant);
 	}
 }

@@ -173,8 +173,7 @@ public class RestaurantBean extends Bean {
 
 	public static RestaurantBean getRestaurantById(long id) {
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE id = " + id);
+			ResultSet rs = select("SELECT * FROM " + table + " WHERE id = " + id);
 			rs.next();
 			return getRestaurantFromRS(rs);
 		} catch (SQLException ex) {
@@ -187,8 +186,7 @@ public class RestaurantBean extends Bean {
 	public static List<RestaurantBean> getAllBeans() {
 		List<RestaurantBean> restaurants = new ArrayList<>();
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM " + table);
+			ResultSet rs = select("SELECT * FROM " + table);
 			while (rs.next()) {
 				restaurants.add(getRestaurantFromRS(rs));
 			}
@@ -202,8 +200,7 @@ public class RestaurantBean extends Bean {
 	public static List<RestaurantBean> getRestaurantsOfAccount(String accountId) {
 		List<RestaurantBean> restaurants = new ArrayList<>();
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE account = '" + accountId + "'");
+			ResultSet rs = select("SELECT * FROM " + table + " WHERE account = '" + accountId + "'");
 			while (rs.next()) {
 				restaurants.add(getRestaurantFromRS(rs));
 			}
@@ -233,8 +230,7 @@ public class RestaurantBean extends Bean {
 	public static List<RestaurantBean> getSubscribedRestaurantsOfAccount(String accountId) {
 		List<RestaurantBean> restaurants = new ArrayList<>();
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT r.* FROM " + table + " r, " + AccountSubscriptionBean.getTable()
+			ResultSet rs = select("SELECT r.* FROM " + table + " r, " + AccountSubscriptionBean.getTable()
 				+ " us WHERE us.account = '" + accountId + "' AND r.id = us.restaurant");
 			while (rs.next()) {
 				restaurants.add(getRestaurantFromRS(rs));

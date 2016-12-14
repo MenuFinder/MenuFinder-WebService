@@ -108,8 +108,7 @@ public class MenuBean extends Bean {
 
 	public static MenuBean getMenuById(long id) {
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE id = " + id);
+			ResultSet rs = select("SELECT * FROM " + table + " WHERE id = " + id);
 			rs.next();
 			return getMenuFromRS(rs);
 		} catch (SQLException ex) {
@@ -122,8 +121,7 @@ public class MenuBean extends Bean {
 	public static List<MenuBean> getAllBeans() {
 		List<MenuBean> menus = new ArrayList<>();
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM " + table);
+			ResultSet rs = select("SELECT * FROM " + table);
 			while (rs.next()) {
 				menus.add(getMenuFromRS(rs));
 			}
@@ -137,8 +135,7 @@ public class MenuBean extends Bean {
 	public static List<MenuBean> getMenusOfRestaurant(long restaurantId) {
 		List<MenuBean> menus = new ArrayList<>();
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE restaurant = " + restaurantId);
+			ResultSet rs = select("SELECT * FROM " + table + " WHERE restaurant = " + restaurantId);
 			while (rs.next()) {
 				menus.add(getMenuFromRS(rs));
 			}

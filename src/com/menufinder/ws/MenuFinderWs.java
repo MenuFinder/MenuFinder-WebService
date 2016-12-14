@@ -1,10 +1,9 @@
 package com.menufinder.ws;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -227,7 +226,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces("application/json; charset=UTF-8")
 	@Path("/updateReview")
 	public String updateReview(ReviewBean review) {
-		review.save();
+		try {
+			review.save();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Error updating review: "+ review.getId();
+		}
 		return "Review: "+ review.getId() + " updated successfully!";
 	}
 
@@ -239,7 +243,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	public String deleteReview(@PathParam("id")long reviewId) {
 		ReviewBean review = new ReviewBean();
 		review.setId(reviewId);
-		review.delete();
+		try {
+			review.delete();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Error deleting review: "+ reviewId;
+		}
 		return "Review: "+ reviewId + " deleted successfully!";
 	}
 
@@ -249,7 +258,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces("application/json; charset=UTF-8")
 	@Path("/addReview")
 	public String addReview(ReviewBean review) {
-		review.save();
+		try {
+			review.save();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Error adding review!";
+		}
 		return "Review added successfully!";
 	}
 
@@ -259,7 +273,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces("application/json; charset=UTF-8")
 	@Path("/updateItem")
 	public String updateItem(ItemBean item) {
-		item.save();
+		try {
+			item.save();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Error updating item: "+ item.getId();
+		}
 		return "Item: "+ item.getId() + " updated successfully!";
 	}
 
@@ -271,7 +290,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	public String deleteItem(@PathParam("id")long itemId) {
 		ItemBean item = new ItemBean();
 		item.setId(itemId);
-		item.delete();
+		try {
+			item.delete();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Error deleting item: "+ itemId;
+		}
 		return "Item: "+ itemId + " deleted successfully!";
 	}
 
@@ -281,7 +305,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces("application/json; charset=UTF-8")
 	@Path("/addItem")
 	public String addItem(ItemBean item) {
-		item.save();
+		try {
+			item.save();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Error adding item!";
+		}
 		return "Item added successfully!";
 	}
 
@@ -315,7 +344,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces("application/json; charset=UTF-8")
 	@Path("/addMenuItem")
 	public String addMenuItem(MenuItemBean menuItem) {
-		menuItem.save();
+		try {
+			menuItem.save();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Error adding item to menu!";
+		}
 		return "Item added successfully to the menu!";
 	}
 
@@ -343,7 +377,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces("application/json; charset=UTF-8")
 	@Path("/addItemCategory")
 	public String addItemCategory(ItemCategoryBean itemCategory) {
-		itemCategory.save();
+		try {
+			itemCategory.save();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Error adding item category!";
+		}
 		return "Category added successfully!";
 	}
 
@@ -371,7 +410,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces("application/json; charset=UTF-8")
 	@Path("/updateItemCategory")
 	public String updateItemCategory(ItemCategoryBean itemCategory) {
-		itemCategory.save();
+		try {
+			itemCategory.save();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Error updating category: "+ itemCategory.getId();
+		}
 		return "Category: "+ itemCategory.getId() + " updated successfully!";
 	}
 	
@@ -395,7 +439,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces("application/json; charset=UTF-8")
 	@Path("/updateItemRating")
 	public String updateItemRating(ItemRatingBean itemRating) {
-		itemRating.save();
+		try {
+			itemRating.save();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Error updating rating: "+ itemRating.getId();
+		}
 		return "Rating: "+ itemRating.getId() + " updated successfully!";
 	}
 
@@ -422,7 +471,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces("application/json; charset=UTF-8")
 	@Path("/addItemCategory")
 	public String addItemRating(ItemRatingBean itemRating) {
-		itemRating.save();
+		try {
+			itemRating.save();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Error adding item category!";
+		}
 		return "Rating added successfully!";
 	}
 
@@ -449,7 +503,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces("application/json; charset=UTF-8")
 	@Path("/addAccountSubscription")
 	public String addAccountSubscription(AccountSubscriptionBean accountSubscription) {
-		accountSubscription.save();
+		try {
+			accountSubscription.save();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Error adding account subscription!";
+		}
 		return "Feed added successfully!";
 	}
 

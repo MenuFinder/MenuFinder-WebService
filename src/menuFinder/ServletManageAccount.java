@@ -1,6 +1,7 @@
 package menuFinder;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -108,7 +109,12 @@ public class ServletManageAccount extends HttpServlet {
 		String password = request.getParameter("password");
 		String type = request.getParameter("type");
 		AccountBean a = new AccountBean(accountid, password, type, true);
-		a.save();
+		try {
+			a.save();
+		} catch (SQLException e) {
+			System.err.println("Error creating account!");
+			e.printStackTrace();
+		}
 		HttpSession session = request.getSession();
 		session.setAttribute("loggedUser", a);
 		showAccountRestaurants(request, response);

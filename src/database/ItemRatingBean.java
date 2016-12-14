@@ -100,8 +100,7 @@ public class ItemRatingBean extends Bean {
 	public static List<ItemRatingBean> getRatingsOfItem(long itemId) {
 		List<ItemRatingBean> ratings = new ArrayList<>();
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE item = " + itemId);
+			ResultSet rs = select("SELECT * FROM " + table + " WHERE item = " + itemId);
 			while (rs.next()) {
 				ratings.add(getItemRatingFromRS(rs));
 			}

@@ -1,6 +1,8 @@
 package menuFinder;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -72,7 +74,12 @@ public class ServletManageMenus extends HttpServlet {
 		String description = request.getParameter("description");
 		Double price = new Double(request.getParameter("price"));
 		MenuBean r = new MenuBean(restaurant, name, description, price, 0);
-		r.save();
+		try {
+			r.save();
+		} catch (SQLException e) {
+			System.err.println("Error adding menu!");
+			e.printStackTrace();
+		}
 		showRestaurantMenus(request, response, restaurant);
 	}
 
@@ -121,7 +128,12 @@ public class ServletManageMenus extends HttpServlet {
 		r.setName(name);
 		r.setDescription(description);
 		r.setPrice(price);
-		r.save();
+		try {
+			r.save();
+		} catch (SQLException e) {
+			System.err.println("Error updating menu!");
+			e.printStackTrace();
+		}
 		showRestaurantMenus(request, response, restaurant);
 	}
 	
@@ -134,7 +146,12 @@ public class ServletManageMenus extends HttpServlet {
 		Double price = new Double(request.getParameter("price"));
 		Double score = new Double(request.getParameter("score"));
 		MenuBean r = new MenuBean(menuid,restaurant, name, description, price, score);
-		r.delete();
+		try {
+			r.delete();
+		} catch (SQLException e) {
+			System.err.println("Error deleting menu!");
+			e.printStackTrace();
+		}
 		showRestaurantMenus(request, response, restaurant);
 	}
 
@@ -156,7 +173,12 @@ public class ServletManageMenus extends HttpServlet {
 		long categoryId = Long.parseLong(request.getParameter("categoryid"));
 		System.out.println("Deleting item '" + itemId + "' of menu '" + menuId + "'." );
 		MenuItemBean mi = new MenuItemBean(menuId, itemId, categoryId);
-		mi.delete();
+		try {
+			mi.delete();
+		} catch (SQLException e) {
+			System.err.println("Error deleting menu item!");
+			e.printStackTrace();
+		}
 		showManageMenuItemsDialog(request, response, menuId);
 	}
 
@@ -166,7 +188,12 @@ public class ServletManageMenus extends HttpServlet {
 		long categoryId = Long.parseLong(request.getParameter("categoryid"));
 		System.out.println("Adding item '" + itemId + "' to menu '" + menuId + "'." );
 		MenuItemBean mi = new MenuItemBean(menuId, itemId, categoryId);
-		mi.save();
+		try {
+			mi.save();
+		} catch (SQLException e) {
+			System.err.println("Error adding item to menu!");
+			e.printStackTrace();
+		}
 		showManageMenuItemsDialog(request, response, menuId);
 	}
 }

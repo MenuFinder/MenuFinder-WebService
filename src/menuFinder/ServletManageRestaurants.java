@@ -1,6 +1,7 @@
 package menuFinder;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -102,7 +103,12 @@ public class ServletManageRestaurants extends HttpServlet {
 				request.getParameter("city"), request.getParameter("postalcode"), request.getParameter("state"),
 				request.getParameter("country"), request.getParameter("email"), request.getParameter("phone"),
 				request.getParameter("accountid"));
-		r.save();
+		try {
+			r.save();
+		} catch (SQLException e) {
+			System.err.println("Error adding restaurant!");
+			e.printStackTrace();
+		}
 		showAccountRestaurants(request, response);
 	}
 
@@ -113,7 +119,12 @@ public class ServletManageRestaurants extends HttpServlet {
 				request.getParameter("cif"), request.getParameter("address"), request.getParameter("city"),
 				request.getParameter("postalcode"), request.getParameter("state"), request.getParameter("country"),
 				request.getParameter("email"), request.getParameter("phone"), request.getParameter("accountid"));
-		r.save();
+		try {
+			r.save();
+		} catch (SQLException e) {
+			System.err.println("Error updating restuarant!");
+			e.printStackTrace();
+		}
 		showAccountRestaurants(request, response);
 	}
 
@@ -122,7 +133,12 @@ public class ServletManageRestaurants extends HttpServlet {
 		System.out.println("Deleting restaurant: " + restaurantId);
 		RestaurantBean r = new RestaurantBean();
 		r.setId(restaurantId);
-		r.delete();
+		try {
+			r.delete();
+		} catch (SQLException e) {
+			System.err.println("Error deleting restaurant!");
+			e.printStackTrace();
+		}
 		showAccountRestaurants(request, response);
 	}
 

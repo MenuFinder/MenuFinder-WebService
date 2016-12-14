@@ -93,8 +93,7 @@ public class AccountBean extends Bean {
 
 	public static AccountBean getAccountById(long id) {
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE id = '" + id + "'");
+			ResultSet rs = select("SELECT * FROM " + table + " WHERE id = '" + id + "'");
 			rs.next();
 			return getAccountFromRS(rs);
 		} catch (SQLException ex) {
@@ -106,10 +105,7 @@ public class AccountBean extends Bean {
 
 	public static boolean isValidLogin(String id, String password) {
 		try {
-			DBManager db = DBManager.getInstance();
-
-			ResultSet rs = db.executeQuery(
-					"SELECT * FROM " + table + " WHERE id = '" + id + "' AND password = '" + password + "'");
+			ResultSet rs = select("SELECT * FROM " + table + " WHERE id = '" + id + "' AND password = '" + password + "'");
 			rs.next();
 			rs.getString("id");
 			return true;

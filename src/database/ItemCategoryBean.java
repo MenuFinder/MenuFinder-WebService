@@ -72,8 +72,7 @@ public class ItemCategoryBean extends Bean {
 
 	public static ItemCategoryBean getItemCategoryById(long id) {
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM " + table + " WHERE id = " + id);
+			ResultSet rs = select("SELECT * FROM " + table + " WHERE id = " + id);
 			rs.next();
 			return getIteamCategoryFromRS(rs);
 		} catch (SQLException ex) {
@@ -86,8 +85,7 @@ public class ItemCategoryBean extends Bean {
 	public static List<ItemCategoryBean> getAllBeans() {
 		List<ItemCategoryBean> itemCategories = new ArrayList<>();
 		try {
-			DBManager db = DBManager.getInstance();
-			ResultSet rs = db.executeQuery("SELECT * FROM " + table);
+			ResultSet rs = select("SELECT * FROM " + table);
 			while (rs.next()) {
 				itemCategories.add(getIteamCategoryFromRS(rs));
 			}
