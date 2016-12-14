@@ -29,7 +29,7 @@ public interface IMenuFinderWS {
 	
 	public RestaurantBean getRestaurantById(@PathParam("id")long restaurantId);
 	public String addNewRestaurant(RestaurantBean restaurant);
-	public List<RestaurantBean> getRestaurantes();
+	public List<RestaurantBean> getRestaurants();
 	public String deleteRestaurant(@PathParam("id") long restaurantId);
 	public String updateRestaurant(RestaurantBean restaurant);
 

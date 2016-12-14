@@ -165,7 +165,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("getAllRestaurants")
-	public List<RestaurantBean> getRestaurantes() {
+	public List<RestaurantBean> getRestaurants() {
 		return RestaurantBean.getAllBeans();
 	}
 
