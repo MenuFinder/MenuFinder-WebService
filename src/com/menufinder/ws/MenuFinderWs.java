@@ -49,8 +49,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("login")
 	public AccountBean getValidLogin(@FormParam(value = "id") String id, @FormParam(value = "password")String password) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			if (AccountBean.isValidLogin(id, password)) AccountBean.getAccountById(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return new AccountBean();
 	}
 
 	@GET

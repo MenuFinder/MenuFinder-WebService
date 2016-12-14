@@ -85,7 +85,7 @@ public class AccountBean extends Bean {
 		return account;
 	}
 
-	public static AccountBean getAccountById(long id) throws SQLException {
+	public static AccountBean getAccountById(String id) throws SQLException {
 		ResultSet rs = select("SELECT * FROM " + table + " WHERE id = '" + id + "'");
 		rs.next();
 		return getAccountFromRS(rs);
