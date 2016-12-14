@@ -123,12 +123,12 @@ public class ServletManageMenus extends HttpServlet {
 		long restaurant = Long.parseLong(request.getParameter("restaurantid"));
 		String description = request.getParameter("description");
 		Double price = new Double(request.getParameter("price"));
-		MenuBean r = MenuBean.getMenuById(menuid);
-		r.setId(menuid);
-		r.setName(name);
-		r.setDescription(description);
-		r.setPrice(price);
 		try {
+			MenuBean r = MenuBean.getMenuById(menuid);
+			r.setId(menuid);
+			r.setName(name);
+			r.setDescription(description);
+			r.setPrice(price);
 			r.save();
 		} catch (SQLException e) {
 			System.err.println("Error updating menu!");
