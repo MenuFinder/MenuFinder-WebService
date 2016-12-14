@@ -64,7 +64,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("getMenu/{id}")
 	public MenuBean getMenuById(@PathParam("id") long menuId) {
-		return MenuBean.getMenuById(menuId);
+		try {
+			return MenuBean.getMenuById(menuId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new MenuBean();
+		}
 	}
 	
 	@POST	
@@ -132,7 +137,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("restaurant/{id}")
 	public RestaurantBean getRestaurantById(@PathParam("id") long restaurantId) {
-		return RestaurantBean.getRestaurantById(restaurantId);
+		try {
+			return RestaurantBean.getRestaurantById(restaurantId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new RestaurantBean();
+		}
 	}
 
 	@POST	
@@ -193,7 +203,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/review/{id}")
 	public ReviewBean getReviewById(@PathParam("id")long reviewId) {
-		return ReviewBean.getReviewById(reviewId);
+		try {
+			return ReviewBean.getReviewById(reviewId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ReviewBean();
+		}
 	}
 
 	@Override
@@ -428,7 +443,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("itemCategory/{id}")
 	public ItemCategoryBean getItemCategoryById(@PathParam("id") long id) {
-		return ItemCategoryBean.getItemCategoryById(id);
+		try {
+			return ItemCategoryBean.getItemCategoryById(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ItemCategoryBean();
+		}
 	}
 	
 	@GET
