@@ -97,15 +97,9 @@ public class ReviewBean extends Bean {
 				+ parentType + "', " + parentId + ", '" + account + "')";
 	}
 
-	protected static ReviewBean getReviewBeanFromRS(ResultSet rs) {
-		try {
-			return new ReviewBean(rs.getLong("id"), rs.getString("review"), rs.getString("parent_type"),
-					rs.getLong("parent_id"), rs.getString("account"));
-		} catch (SQLException e) {
-			System.err.println("Error retrieving bean.");
-			e.printStackTrace();
-			return null;
-		}
+	protected static ReviewBean getReviewBeanFromRS(ResultSet rs) throws SQLException {
+		return new ReviewBean(rs.getLong("id"), rs.getString("review"), rs.getString("parent_type"),
+				rs.getLong("parent_id"), rs.getString("account"));
 	}
 
 	protected static List<ReviewBean> getReviewsOfParent(String parentType, long parentId) {
@@ -123,16 +117,10 @@ public class ReviewBean extends Bean {
 		return reviews;
 	}
 
-	public static ReviewBean getReviewById(long id) {
-		try {
-			ResultSet rs = select("SELECT * FROM " + table + " WHERE id = " + id);
-			rs.next();
-			return getReviewBeanFromRS(rs);
-		} catch (SQLException ex) {
-			System.err.println("Error retrieving review with id: '" + id + "'.");
-			ex.printStackTrace();
-			return null;
-		}
+	public static ReviewBean getReviewById(long id) throws SQLException {
+		ResultSet rs = select("SELECT * FROM " + table + " WHERE id = " + id);
+		rs.next();
+		return getReviewBeanFromRS(rs);
 	}
 
 }
