@@ -86,15 +86,9 @@ public class ItemRatingBean extends Bean {
 				+ ")";
 	}
 
-	private static ItemRatingBean getItemRatingFromRS(ResultSet rs) {
-		try {
-			return new ItemRatingBean(rs.getLong("id"), rs.getDouble("score"), rs.getString("account"),
-					rs.getLong("item"));
-		} catch (SQLException e) {
-			System.err.println("Error retrieving bean.");
-			e.printStackTrace();
-			return null;
-		}
+	private static ItemRatingBean getItemRatingFromRS(ResultSet rs) throws SQLException {
+		return new ItemRatingBean(rs.getLong("id"), rs.getDouble("score"), rs.getString("account"),
+				rs.getLong("item"));
 	}
 	
 	public static List<ItemRatingBean> getRatingsOfItem(long itemId) {
