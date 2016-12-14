@@ -76,31 +76,19 @@ public class AccountBean extends Bean {
 				+ type + "', '" + token + "')";
 	}
 
-	private static AccountBean getAccountFromRS(ResultSet rs) {
-		try {
-			AccountBean account = new AccountBean();
-			account.setId(rs.getString("id"), false);
-			account.setPassword(rs.getString("password"));
-			account.setType(rs.getString("type"));
-			account.setToken(rs.getString("token"));
-			return account;
-		} catch (SQLException e) {
-			System.err.println("Error retrieving bean.");
-			e.printStackTrace();
-			return null;
-		}
+	private static AccountBean getAccountFromRS(ResultSet rs) throws SQLException {
+		AccountBean account = new AccountBean();
+		account.setId(rs.getString("id"), false);
+		account.setPassword(rs.getString("password"));
+		account.setType(rs.getString("type"));
+		account.setToken(rs.getString("token"));
+		return account;
 	}
 
-	public static AccountBean getAccountById(long id) {
-		try {
-			ResultSet rs = select("SELECT * FROM " + table + " WHERE id = '" + id + "'");
-			rs.next();
-			return getAccountFromRS(rs);
-		} catch (SQLException ex) {
-			System.err.println("Error retrieving account with id: '" + id + "'.");
-			ex.printStackTrace();
-			return null;
-		}
+	public static AccountBean getAccountById(long id) throws SQLException {
+		ResultSet rs = select("SELECT * FROM " + table + " WHERE id = '" + id + "'");
+		rs.next();
+		return getAccountFromRS(rs);
 	}
 
 	public static boolean isValidLogin(String id, String password) {
