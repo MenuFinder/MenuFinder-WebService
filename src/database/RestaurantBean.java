@@ -171,16 +171,10 @@ public class RestaurantBean extends Bean {
 				+ "')";
 	}
 
-	public static RestaurantBean getRestaurantById(long id) {
-		try {
-			ResultSet rs = select("SELECT * FROM " + table + " WHERE id = " + id);
-			rs.next();
-			return getRestaurantFromRS(rs);
-		} catch (SQLException ex) {
-			System.err.println("Error retrieving restaurants with id: '" + id + "'.");
-			ex.printStackTrace();
-			return null;
-		}
+	public static RestaurantBean getRestaurantById(long id) throws SQLException {
+		ResultSet rs = select("SELECT * FROM " + table + " WHERE id = " + id);
+		rs.next();
+		return getRestaurantFromRS(rs);
 	}
 
 	public static List<RestaurantBean> getAllBeans() {
@@ -215,16 +209,10 @@ public class RestaurantBean extends Bean {
 		return "SELECT * FROM " + table;
 	}
 
-	private static RestaurantBean getRestaurantFromRS(ResultSet rs) {
-		try {
-			return new RestaurantBean(rs.getLong("id"), rs.getString("name"), rs.getString("cif"),
-					rs.getString("address"), rs.getString("city"), rs.getString("postalcode"), rs.getString("state"),
-					rs.getString("country"), rs.getString("email"), rs.getString("phone"), rs.getString("account"));
-		} catch (SQLException e) {
-			System.err.println("Error retrieving bean.");
-			e.printStackTrace();
-			return null;
-		}
+	private static RestaurantBean getRestaurantFromRS(ResultSet rs) throws SQLException {
+		return new RestaurantBean(rs.getLong("id"), rs.getString("name"), rs.getString("cif"),
+				rs.getString("address"), rs.getString("city"), rs.getString("postalcode"), rs.getString("state"),
+				rs.getString("country"), rs.getString("email"), rs.getString("phone"), rs.getString("account"));
 	}
 
 	public static List<RestaurantBean> getSubscribedRestaurantsOfAccount(String accountId) {
