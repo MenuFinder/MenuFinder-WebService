@@ -108,16 +108,10 @@ public class ItemBean extends Bean {
 				+ description + "', " + price + ", " + score + ", " + restaurant + ")";
 	}
 
-	public static ItemBean getItemById(long id) {
-		try {
-			ResultSet rs = select("SELECT * FROM " + table + " WHERE id = " + id);
-			rs.next();
-			return getItemsFromRS(rs);
-		} catch (SQLException ex) {
-			System.err.println("Error retrieving items with id: '" + id + "'.");
-			ex.printStackTrace();
-			return null;
-		}
+	public static ItemBean getItemById(long id) throws SQLException {
+		ResultSet rs = select("SELECT * FROM " + table + " WHERE id = " + id);
+		rs.next();
+		return getItemsFromRS(rs);
 	}
 
 	public static List<ItemBean> getRestaurantItems(long restaurantId) {
@@ -152,15 +146,9 @@ public class ItemBean extends Bean {
 		return itemsCategory;
 	}
 
-	private static ItemBean getItemsFromRS(ResultSet rs) {
-		try {
-			return new ItemBean(rs.getLong("id"), rs.getString("name"), rs.getString("description"),
+	private static ItemBean getItemsFromRS(ResultSet rs) throws SQLException {
+		return new ItemBean(rs.getLong("id"), rs.getString("name"), rs.getString("description"),
 					rs.getDouble("price"), rs.getDouble("score"), rs.getLong("restaurant"));
-		} catch (SQLException e) {
-			System.err.println("Error retrieving bean.");
-			e.printStackTrace();
-			return null;
-		}
 	}
 
 }
