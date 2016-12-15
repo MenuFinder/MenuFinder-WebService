@@ -10,14 +10,12 @@ public class AccountSubscriptionBean extends Bean {
 
 	public AccountSubscriptionBean() {
 		super();
-		isNewRecord = true;
 	}
 
 	public AccountSubscriptionBean(String account, long restaurant) {
 		super();
 		this.account = account;
 		this.restaurant = restaurant;
-		isNewRecord = true;
 	}
 
 	public String getAccount() {

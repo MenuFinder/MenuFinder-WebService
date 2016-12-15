@@ -11,7 +11,6 @@ public class MenuItemBean extends Bean {
 
 	public MenuItemBean() {
 		super();
-		isNewRecord = true;
 	}
 
 	public MenuItemBean(long menu, long item, long itemCategory) {
@@ -19,7 +18,6 @@ public class MenuItemBean extends Bean {
 		this.menu = menu;
 		this.item = item;
 		this.itemCategory = itemCategory;
-		isNewRecord = true;
 	}
 
 	public long getMenu() {

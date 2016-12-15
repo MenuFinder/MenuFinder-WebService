@@ -104,7 +104,7 @@ public class ServletManageRestaurants extends HttpServlet {
 				request.getParameter("country"), request.getParameter("email"), request.getParameter("phone"),
 				request.getParameter("accountid"));
 		try {
-			r.save();
+			r.insert();
 		} catch (SQLException e) {
 			System.err.println("Error adding restaurant!");
 			e.printStackTrace();
@@ -120,7 +120,7 @@ public class ServletManageRestaurants extends HttpServlet {
 				request.getParameter("postalcode"), request.getParameter("state"), request.getParameter("country"),
 				request.getParameter("email"), request.getParameter("phone"), request.getParameter("accountid"));
 		try {
-			r.save();
+			r.update();
 		} catch (SQLException e) {
 			System.err.println("Error updating restuarant!");
 			e.printStackTrace();

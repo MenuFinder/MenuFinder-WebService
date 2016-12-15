@@ -36,7 +36,6 @@ public class RestaurantBean extends Bean {
 		this.email = email;
 		this.phone = phone;
 		this.account = account;
-		isNewRecord = false;
 	}
 
 	public RestaurantBean(String name, String cif, String address, String city, String postalCode, String state,
@@ -53,12 +52,10 @@ public class RestaurantBean extends Bean {
 		this.phone = phone;
 		this.account = account;
 		id = -1;
-		isNewRecord = true;
 	}
 
 	public RestaurantBean() {
 		super();
-		isNewRecord = true;
 	}
 
 	public long getId() {
@@ -66,7 +63,6 @@ public class RestaurantBean extends Bean {
 	}
 
 	public void setId(long id) {
-		isNewRecord = false;
 		this.id = id;
 	}
 

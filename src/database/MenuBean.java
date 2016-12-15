@@ -19,7 +19,6 @@ public class MenuBean extends Bean {
 
 	public MenuBean() {
 		super();
-		isNewRecord = true;
 	}
 
 	public MenuBean(long id, long restaurant, String name, String description, double price, double score) {
@@ -30,7 +29,6 @@ public class MenuBean extends Bean {
 		this.description = description;
 		this.price = price;
 		this.score = score;
-		isNewRecord = false;
 	}
 
 	public MenuBean(long restaurant, String name, String description, double price, double score) {
@@ -40,7 +38,6 @@ public class MenuBean extends Bean {
 		this.description = description;
 		this.price = price;
 		this.score = score;
-		isNewRecord = true;
 	}
 
 	public long getId() {
@@ -48,7 +45,6 @@ public class MenuBean extends Bean {
 	}
 
 	public void setId(long id) {
-		isNewRecord = false;
 		this.id = id;
 	}
 

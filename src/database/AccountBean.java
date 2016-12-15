@@ -18,20 +18,18 @@ public class AccountBean extends Bean {
 		super();
 	}
 
-	public AccountBean(String id, String password, String type, boolean isNewRecord) {
+	public AccountBean(String id, String password, String type) {
 		super();
 		this.id = id;
 		this.password = password;
 		this.type = type;
-		this.isNewRecord = isNewRecord;
 	}
 
 	public String getId() {
 		return id;
 	}
 
-	public void setId(String id, boolean isNewRecord) {
-		this.isNewRecord = isNewRecord;
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -78,7 +76,7 @@ public class AccountBean extends Bean {
 
 	private static AccountBean getAccountFromRS(ResultSet rs) throws SQLException {
 		AccountBean account = new AccountBean();
-		account.setId(rs.getString("id"), false);
+		account.setId(rs.getString("id"));
 		account.setPassword(rs.getString("password"));
 		account.setType(rs.getString("type"));
 		account.setToken(rs.getString("token"));
@@ -113,7 +111,7 @@ public class AccountBean extends Bean {
 	         pst.setString(2, password);
 	         ResultSet rs = pst.executeQuery();
 	         if(rs.next()){  
-	        	 loggedAcc.setId(rs.getString("id"),false);  
+	        	 loggedAcc.setId(rs.getString("id"));
 	        	 loggedAcc.setPassword(rs.getString("password"));  	        	  
 	        	 loggedAcc.setType(rs.getString("type"));  	
 	        	 return loggedAcc;

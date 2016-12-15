@@ -84,7 +84,7 @@ public class MenuFinderWs implements IMenuFinderWS {
  
 		try {
 			MenuBean entity = new MenuBean(menu.getRestaurant(), menu.getName(), menu.getDescription(),menu. getPrice(), 0);
-			entity.save();
+			entity.insert();
  
 			return "Menu added successfully!";
  
@@ -127,7 +127,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	public String updateMenu(MenuBean menu) {
 		try {
 			MenuBean entity = new MenuBean(menu.getId(),menu.getRestaurant(), menu.getName(), menu.getDescription(),menu.getPrice(), menu.getScore());
-			entity.save();
+			entity.update();
  
 			return "Menu  "+menu.getId() +"  updated successfully!";
  
@@ -155,7 +155,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("/addRestaurant")
 	public String addNewRestaurant(RestaurantBean restaurant) {
 		try {			
-			restaurant.save();
+			restaurant.insert();
 			return "Restaurant added successfully!";
 		} catch (Exception e) {
 			return "Error trying to add the new Restaurant " + e.getMessage();
@@ -192,7 +192,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("/updateRestaurant")
 	public String updateRestaurant(RestaurantBean restaurant) {
 		try {
-			restaurant.save();
+			restaurant.update();
 
 			return "Restaurant  "+restaurant.getId() +"  updated successfully!";
  
@@ -246,7 +246,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("/updateReview")
 	public String updateReview(ReviewBean review) {
 		try {
-			review.save();
+			review.update();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "Error updating review: "+ review.getId();
@@ -278,7 +278,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("/addReview")
 	public String addReview(ReviewBean review) {
 		try {
-			review.save();
+			review.insert();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "Error adding review!";
@@ -293,7 +293,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("/updateItem")
 	public String updateItem(ItemBean item) {
 		try {
-			item.save();
+			item.update();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "Error updating item: "+ item.getId();
@@ -325,7 +325,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("/addItem")
 	public String addItem(ItemBean item) {
 		try {
-			item.save();
+			item.insert();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "Error adding item!";
@@ -369,7 +369,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("/addMenuItem")
 	public String addMenuItem(MenuItemBean menuItem) {
 		try {
-			menuItem.save();
+			menuItem.insert();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "Error adding item to menu!";
@@ -402,7 +402,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("/addItemCategory")
 	public String addItemCategory(ItemCategoryBean itemCategory) {
 		try {
-			itemCategory.save();
+			itemCategory.insert();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "Error adding item category!";
@@ -435,7 +435,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("/updateItemCategory")
 	public String updateItemCategory(ItemCategoryBean itemCategory) {
 		try {
-			itemCategory.save();
+			itemCategory.update();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "Error updating category: "+ itemCategory.getId();
@@ -469,7 +469,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("/updateItemRating")
 	public String updateItemRating(ItemRatingBean itemRating) {
 		try {
-			itemRating.save();
+			itemRating.update();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "Error updating rating: "+ itemRating.getId();
@@ -501,7 +501,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("/addItemCategory")
 	public String addItemRating(ItemRatingBean itemRating) {
 		try {
-			itemRating.save();
+			itemRating.insert();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "Error adding item category!";
@@ -533,7 +533,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("/addAccountSubscription")
 	public String addAccountSubscription(AccountSubscriptionBean accountSubscription) {
 		try {
-			accountSubscription.save();
+			accountSubscription.insert();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "Error adding account subscription!";

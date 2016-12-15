@@ -65,7 +65,7 @@ public class ServletManageItems extends HttpServlet {
 		Double price = new Double(request.getParameter("price"));
 		ItemBean i = new ItemBean(name, description, price, 0, restaurant);
 		try {
-			i.save();
+			i.insert();
 		} catch (SQLException e) {
 			System.err.println("Error creating item!");
 			e.printStackTrace();
@@ -119,7 +119,7 @@ public class ServletManageItems extends HttpServlet {
 			i.setName(name);
 			i.setDescription(description);
 			i.setPrice(price);
-			i.save();
+			i.update();
 		} catch (SQLException e) {
 			System.err.println("Error updating item!");
 			e.printStackTrace();

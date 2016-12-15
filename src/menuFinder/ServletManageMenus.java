@@ -75,7 +75,7 @@ public class ServletManageMenus extends HttpServlet {
 		Double price = new Double(request.getParameter("price"));
 		MenuBean r = new MenuBean(restaurant, name, description, price, 0);
 		try {
-			r.save();
+			r.insert();
 		} catch (SQLException e) {
 			System.err.println("Error adding menu!");
 			e.printStackTrace();
@@ -129,7 +129,7 @@ public class ServletManageMenus extends HttpServlet {
 			r.setName(name);
 			r.setDescription(description);
 			r.setPrice(price);
-			r.save();
+			r.update();
 		} catch (SQLException e) {
 			System.err.println("Error updating menu!");
 			e.printStackTrace();
@@ -189,7 +189,7 @@ public class ServletManageMenus extends HttpServlet {
 		System.out.println("Adding item '" + itemId + "' to menu '" + menuId + "'." );
 		MenuItemBean mi = new MenuItemBean(menuId, itemId, categoryId);
 		try {
-			mi.save();
+			mi.insert();
 		} catch (SQLException e) {
 			System.err.println("Error adding item to menu!");
 			e.printStackTrace();

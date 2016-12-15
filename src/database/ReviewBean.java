@@ -18,7 +18,6 @@ public class ReviewBean extends Bean {
 
 	public ReviewBean() {
 		super();
-		isNewRecord = true;
 	}
 
 	public ReviewBean(String review, String parentType, long parentId, String account) {
@@ -27,7 +26,6 @@ public class ReviewBean extends Bean {
 		this.parentType = parentType;
 		this.parentId = parentId;
 		this.account = account;
-		isNewRecord = true;
 	}
 
 	public ReviewBean(long id, String review, String parentType, long parentId, String account) {
@@ -37,7 +35,6 @@ public class ReviewBean extends Bean {
 		this.parentType = parentType;
 		this.parentId = parentId;
 		this.account = account;
-		isNewRecord = false;
 	}
 
 	public long getId() {
@@ -46,7 +43,6 @@ public class ReviewBean extends Bean {
 
 	public void setId(long id) {
 		this.id = id;
-		isNewRecord = false;
 	}
 
 	public String getReview() {

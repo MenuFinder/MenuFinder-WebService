@@ -17,7 +17,6 @@ public class ItemRatingBean extends Bean {
 
 	public ItemRatingBean() {
 		super();
-		isNewRecord = true;
 	}
 
 	public ItemRatingBean(double score, String account, long item) {
@@ -25,7 +24,6 @@ public class ItemRatingBean extends Bean {
 		this.score = score;
 		this.account = account;
 		this.item = item;
-		isNewRecord = true;
 	}
 
 	public ItemRatingBean(long id, double score, String account, long item) {
@@ -34,7 +32,6 @@ public class ItemRatingBean extends Bean {
 		this.score = score;
 		this.account = account;
 		this.item = item;
-		isNewRecord = false;
 	}
 
 	public long getId() {
@@ -43,7 +40,6 @@ public class ItemRatingBean extends Bean {
 
 	public void setId(long id) {
 		this.id = id;
-		isNewRecord = false;
 	}
 
 	public double getScore() {

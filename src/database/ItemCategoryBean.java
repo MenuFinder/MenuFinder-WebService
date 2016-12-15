@@ -15,7 +15,6 @@ public class ItemCategoryBean extends Bean {
 
 	public ItemCategoryBean() {
 		super();
-		isNewRecord = true;
 	}
 
 	public ItemCategoryBean(long id, String name, String description) {
@@ -23,14 +22,12 @@ public class ItemCategoryBean extends Bean {
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		isNewRecord = false;
 	}
 
 	public ItemCategoryBean(String name, String description) {
 		super();
 		this.name = name;
 		this.description = description;
-		isNewRecord = true;
 	}
 
 	public long getId() {
@@ -38,7 +35,6 @@ public class ItemCategoryBean extends Bean {
 	}
 
 	public void setId(long id) {
-		isNewRecord = false;
 		this.id = id;
 	}
 
