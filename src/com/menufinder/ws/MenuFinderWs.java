@@ -80,7 +80,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
 	@Path("/addMenu")
-	public String addNewMenu(MenuBean menu){		
+	public String addMenu(MenuBean menu){
  
 		try {
 			MenuBean entity = new MenuBean(menu.getRestaurant(), menu.getName(), menu.getDescription(),menu. getPrice(), 0);
@@ -153,7 +153,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
 	@Path("/addRestaurant")
-	public String addNewRestaurant(RestaurantBean restaurant) {
+	public String addRestaurant(RestaurantBean restaurant) {
 		try {			
 			restaurant.insert();
 			return "Restaurant added successfully!";
@@ -498,7 +498,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@POST
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
-	@Path("/addItemCategory")
+	@Path("/addItemRating")
 	public String addItemRating(ItemRatingBean itemRating) {
 		try {
 			itemRating.insert();

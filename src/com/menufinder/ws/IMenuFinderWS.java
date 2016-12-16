@@ -22,13 +22,13 @@ public interface IMenuFinderWS {
 	public AccountBean getValidLogin(@FormParam(value = "id")String id, @FormParam(value = "password")String password);
 	public List<MenuBean> getMenusByRestaurantId(@PathParam("id")long restaurantId);
 	public MenuBean getMenuById(@PathParam("id") long menuId);
-	public String addNewMenu(MenuBean menu);
+	public String addMenu(MenuBean menu);
 	public List<MenuBean> getMenus();
 	public String deleteMenu(@PathParam("id")long menuId);
 	public String updateMenu(MenuBean menu);
 	
 	public RestaurantBean getRestaurantById(@PathParam("id")long restaurantId);
-	public String addNewRestaurant(RestaurantBean restaurant);
+	public String addRestaurant(RestaurantBean restaurant);
 	public List<RestaurantBean> getRestaurants();
 	public String deleteRestaurant(@PathParam("id") long restaurantId);
 	public String updateRestaurant(RestaurantBean restaurant);
