@@ -381,7 +381,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@DELETE	
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
-	@Path("/deleteItemCategory")
+	@Path("/deleteMenuItem")
 	public String deleteMenuItem(MenuItemBean menuItem) {
 		try {
 			menuItem.delete();
