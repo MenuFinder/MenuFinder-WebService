@@ -201,10 +201,6 @@ public class RestaurantBean extends Bean {
 		return restaurants;
 	}
 
-	public String getAllRowsQuery() {
-		return "SELECT * FROM " + table;
-	}
-
 	private static RestaurantBean getRestaurantFromRS(ResultSet rs) throws SQLException {
 		return new RestaurantBean(rs.getLong("id"), rs.getString("name"), rs.getString("cif"),
 				rs.getString("address"), rs.getString("city"), rs.getString("postalcode"), rs.getString("state"),
