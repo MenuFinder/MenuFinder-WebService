@@ -16,7 +16,7 @@ public class MenuBean extends Bean {
 	private String description;
 	private double price;
 	private double score;
-	private boolean isVisible;
+	private boolean visible;
 
 	public MenuBean() {
 		super();
@@ -30,7 +30,7 @@ public class MenuBean extends Bean {
 		this.description = description;
 		this.price = price;
 		this.score = score;
-		this.isVisible = true;
+		this.visible = true;
 	}
 
 	public MenuBean(long restaurant, String name, String description, double price, double score) {
@@ -40,7 +40,7 @@ public class MenuBean extends Bean {
 		this.description = description;
 		this.price = price;
 		this.score = score;
-		this.isVisible = true;
+		this.visible = true;
 	}
 
 	public long getId() {
@@ -92,11 +92,11 @@ public class MenuBean extends Bean {
 	}
 
 	public boolean isVisible() {
-		return isVisible;
+		return visible;
 	}
 
-	public void setVisible(boolean isVisible) {
-		this.isVisible = isVisible;
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 
 	protected String getDeleteQuery() {
@@ -106,13 +106,13 @@ public class MenuBean extends Bean {
 	protected String getUpdateQuery() {
 		return "UPDATE " + table + " SET restaurant = " + restaurant + ", name = '" + name + "', description = '"
 				+ description + "', price = " + price + ", score = " + score + ", visible = "
-				+ (isVisible ? "true" : "false") + " WHERE id = " + id;
+				+ (visible ? "true" : "false") + " WHERE id = " + id;
 	}
 
 	protected String getInsertQuery() {
 		return "INSERT INTO " + table + " (restaurant, name, description, price, score, visible) VALUES (" 
 				+ restaurant + ", '" + name + "', '" + description + "', " + price + ", " + score + ", "
-				+ (isVisible ? "true" : "false") + ")";
+				+ (visible ? "true" : "false") + ")";
 	}
 
 	public static MenuBean getMenuById(long id) throws SQLException {
