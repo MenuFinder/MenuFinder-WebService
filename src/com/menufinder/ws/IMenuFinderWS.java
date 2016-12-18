@@ -61,7 +61,7 @@ public interface IMenuFinderWS {
 	public String deleteItemRating(ItemRatingBean itemRating);
 	public String addItemRating(ItemRatingBean itemRating);
 	public List<ItemRatingBean> getRatingsOfItem(@PathParam("id")long itemId);
-	public double getItemRatingOfItem(@PathParam("id")long itemId);
+	public String getItemRatingOfItem(@PathParam("id")long itemId);
 	
 	public String deleteAccountSubscription(AccountSubscriptionBean accountSubscription);
 	public String addAccountSubscription(AccountSubscriptionBean accountSubscription);

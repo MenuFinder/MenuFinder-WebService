@@ -544,15 +544,15 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("itemRating/{id}")
-	public List<ItemRatingBean> getRatingsOfItem(long itemId) {
+	public List<ItemRatingBean> getRatingsOfItem(@PathParam("id") long itemId) {
 		return ItemRatingBean.getRatingsOfItem(itemId);
 	}
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces("application/json; charset=UTF-8")
 	@Path("itemRatingItem/{id}")
-	public double getItemRatingOfItem(long itemId) {
-		return ItemRatingBean.getItemRatingOfItem(itemId);
+	public String getItemRatingOfItem(@PathParam("id") long itemId) {
+		return String.valueOf(ItemRatingBean.getItemRatingOfItem(itemId));
 	}
 
 	@Override
