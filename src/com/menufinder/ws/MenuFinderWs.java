@@ -554,6 +554,14 @@ public class MenuFinderWs implements IMenuFinderWS {
 	public double getItemRatingOfItem(long itemId) {
 		return ItemRatingBean.getItemRatingOfItem(itemId);
 	}
+
+	@Override
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("subscribedRestaurantsOfAccount/{id}")
+	public List<RestaurantBean> getSubscribedRestaurantsOfAccount(@PathParam("id") String accountId) {
+		return RestaurantBean.getSubscribedRestaurantsOfAccount(accountId);
+	}
 	
 
 }

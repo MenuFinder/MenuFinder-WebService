@@ -65,5 +65,6 @@ public interface IMenuFinderWS {
 	
 	public String deleteAccountSubscription(AccountSubscriptionBean accountSubscription);
 	public String addAccountSubscription(AccountSubscriptionBean accountSubscription);
+	public List<RestaurantBean> getSubscribedRestaurantsOfAccount(@PathParam("id") String accountId);
 	
 }
