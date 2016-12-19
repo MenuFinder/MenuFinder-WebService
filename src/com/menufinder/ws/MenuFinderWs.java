@@ -55,6 +55,20 @@ public class MenuFinderWs implements IMenuFinderWS {
 		else return new AccountBean();
 	}
 
+	@Override
+	@POST
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/register")
+	public String registerAccount(AccountBean account) {
+		try {
+			account.insert();
+			return "Account created successfully!";
+		} catch (Exception e) {
+			return "Error trying to create the new account " + e.getMessage();
+		}
+	}
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("restaurantMenus/{id}")
@@ -560,6 +574,5 @@ public class MenuFinderWs implements IMenuFinderWS {
 	public List<RestaurantBean> getSubscribedRestaurantsOfAccount(@PathParam("id") String accountId) {
 		return RestaurantBean.getSubscribedRestaurantsOfAccount(accountId);
 	}
-	
 
 }
