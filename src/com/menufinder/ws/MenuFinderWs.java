@@ -45,16 +45,14 @@ public class MenuFinderWs implements IMenuFinderWS {
 				"{\"status\":\"MenuFinder Service is running...\"}").build();
 	}
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@POST
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
 	@Path("login")
-	public AccountBean getValidLogin(@FormParam(value = "id") String id, @FormParam(value = "password")String password) {
-		try {
-			if (AccountBean.isValidLogin(id, password)) AccountBean.getAccountById(id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return new AccountBean();
+	public AccountBean getValidLogin(AccountBean account) {
+		AccountBean login = AccountBean.getValidLogin(account.getId(), account.getPassword());
+		if (login != null) return login;
+		else return new AccountBean();
 	}
 
 	@GET

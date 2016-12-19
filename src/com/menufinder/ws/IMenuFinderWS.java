@@ -19,7 +19,7 @@ import database.ReviewBean;
 
 
 public interface IMenuFinderWS {
-	public AccountBean getValidLogin(@FormParam(value = "id")String id, @FormParam(value = "password")String password);
+	public AccountBean getValidLogin(AccountBean account);
 	public List<MenuBean> getMenusByRestaurantId(@PathParam("id")long restaurantId);
 	public MenuBean getMenuById(@PathParam("id") long menuId);
 	public String addMenu(MenuBean menu);
