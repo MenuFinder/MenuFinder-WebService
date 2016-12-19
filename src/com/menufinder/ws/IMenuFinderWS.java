@@ -29,6 +29,7 @@ public interface IMenuFinderWS {
 	public String updateMenu(MenuBean menu);
 	
 	public RestaurantBean getRestaurantById(@PathParam("id")long restaurantId);
+	public List<RestaurantBean> getRestaurantsOfAccount(@PathParam("id") String accountId);
 	public String addRestaurant(RestaurantBean restaurant);
 	public List<RestaurantBean> getRestaurants();
 	public String deleteRestaurant(@PathParam("id") long restaurantId);

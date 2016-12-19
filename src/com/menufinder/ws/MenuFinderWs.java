@@ -161,6 +161,14 @@ public class MenuFinderWs implements IMenuFinderWS {
 		}
 	}
 
+	@Override
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/restaurantsOfAccount/{id}")
+	public List<RestaurantBean> getRestaurantsOfAccount(@PathParam("id") String accountId) {
+		return RestaurantBean.getRestaurantsOfAccount(accountId);
+	}
+
 	@POST	
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")
