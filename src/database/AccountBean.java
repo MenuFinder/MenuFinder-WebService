@@ -13,6 +13,7 @@ public class AccountBean extends Bean {
 	private String password;
 	private String type;
 	private String token;
+	private String email;
 
 	public AccountBean() {
 		super();
@@ -57,6 +58,14 @@ public class AccountBean extends Bean {
 		this.token = token;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	protected String getDeleteQuery() {
 		return "DELETE FROM " + table + " WHERE id = '" + id + "'";
@@ -65,13 +74,13 @@ public class AccountBean extends Bean {
 	@Override
 	protected String getUpdateQuery() {
 		return "UPDATE " + table + " SET password = '" + password + "', type = '" + type + "', token = '" + token
-				+ "' WHERE id = '" + id + "'";
+				+ ", email = '" + email + "' WHERE id = '" + id + "'";
 	}
 
 	@Override
 	protected String getInsertQuery() {
-		return "INSERT INTO " + table + " (id, password, type, token) VALUES ('" + id + "', '" + password + "', '"
-				+ type + "', '" + token + "')";
+		return "INSERT INTO " + table + " (id, password, type, token, email) VALUES ('" + id + "', '" + password + "', '"
+				+ type + "', '" + token + "', '" + email + "')";
 	}
 
 	private static AccountBean getAccountFromRS(ResultSet rs) throws SQLException {
@@ -80,6 +89,7 @@ public class AccountBean extends Bean {
 		account.setPassword(rs.getString("password"));
 		account.setType(rs.getString("type"));
 		account.setToken(rs.getString("token"));
+		account.setEmail(rs.getString("email"));
 		return account;
 	}
 
