@@ -96,6 +96,7 @@ public class MenuFinderWs implements IMenuFinderWS {
  
 		try {
 			MenuBean entity = new MenuBean(menu.getRestaurant(), menu.getName(), menu.getDescription(),menu. getPrice(), 0);
+			entity.setVisible(menu.isVisible());
 			entity.insert();
  
 			return "Menu added successfully!";
