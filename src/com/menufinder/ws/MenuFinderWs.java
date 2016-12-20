@@ -138,7 +138,9 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("/updateMenu")
 	public String updateMenu(MenuBean menu) {
 		try {
-			MenuBean entity = new MenuBean(menu.getId(),menu.getRestaurant(), menu.getName(), menu.getDescription(),menu.getPrice(), menu.getScore());
+			MenuBean entity = new MenuBean(menu.getId(),menu.getRestaurant(), menu.getName(), menu.getDescription(),
+					menu.getPrice(), menu.getScore());
+			entity.setVisible(menu.isVisible());
 			entity.update();
  
 			return "Menu  "+menu.getId() +"  updated successfully!";
