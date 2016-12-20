@@ -150,8 +150,10 @@ public class MenuBean extends Bean {
 	}
 
 	private static MenuBean getMenuFromRS(ResultSet rs) throws SQLException {
-		return new MenuBean(rs.getLong("id"), rs.getLong("restaurant"), rs.getString("name"),
+		MenuBean m = new MenuBean(rs.getLong("id"), rs.getLong("restaurant"), rs.getString("name"),
 				rs.getString("description"), rs.getDouble("price"), rs.getDouble("score"));
+		m.setVisible(rs.getBoolean("visible"));
+		return m;
 	}
 
 }
