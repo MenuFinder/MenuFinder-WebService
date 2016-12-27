@@ -48,11 +48,11 @@
 			<section id="content" class="column-right">
 			 <article>
 			 <form method="get" action="sManageItems">
-			 <div class="button">
+
 				<input type="hidden" name="action" value="additem"> 
 				<input type="hidden" name="restaurantid" value="<%=restaurantId%>">
-				<input type="submit" value="+ Add Items">
-			</div>
+				<input type="submit" class="button" value="+ Add Items">
+			
 			</form>			
 			</article>
 		<article class="expanded">            		
@@ -101,15 +101,12 @@
 							</form>
 						</td>
 						<td>
-							<form method="get" action="sManageItems">
-							<div class=button>
+							<form method="get" action="sManageItems">				
 							<input type="hidden" name="action" value="edititem"> 
 							<input type="hidden" name="itemid" value="${item.id}">
-							<input type="submit" value="Edit item">
-							</div>
+							<input type="submit"  class="button" value="Edit item">				
 							</form>		
-							<form method="post" action="sManageItems">
-							<div class="button button-reversed">
+							<form method="post" action="sManageItems">				
 								<input type="hidden" name="action" value="deleteitem"> 
 								<input type="hidden" name="itemid" value="${item.id}"> 
 								<input type="hidden" name="name" value="${item.name}"> 
@@ -117,8 +114,7 @@
 								<input type="hidden" name="price" value="${item.price}"> 
 								<input type="hidden" name="score" value="${item.score}"> 
 								<input type="hidden" name="restaurantid" value="${item.restaurant}">
-								<input type="submit" value="Delete item" onclick="return confirm('Do you want to delete this item?')">
-								</div>
+								<input type="submit" class="button button-reversed" value="Delete item" onclick="return confirm('Do you want to delete this item?')">				
 							</form>
 						</td>
 					</tr>
