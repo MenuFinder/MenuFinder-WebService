@@ -51,8 +51,7 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("login")
 	public AccountBean getValidLogin(AccountBean account) {
 		AccountBean login = AccountBean.getValidLogin(account.getId(), account.getPassword());
-		if (login != null) return login;
-		else return new AccountBean();
+		return login != null ? login : new AccountBean();
 	}
 
 	@Override
@@ -93,21 +92,13 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Produces("application/json; charset=UTF-8")
 	@Path("/addMenu")
 	public String addMenu(MenuBean menu){
- 
 		try {
-			MenuBean entity = new MenuBean(menu.getRestaurant(), menu.getName(), menu.getDescription(),menu. getPrice(), 0);
-			entity.setVisible(menu.isVisible());
-			entity.insert();
- 
+			menu.insert();
 			return "Menu added successfully!";
- 
 		} catch (Exception e) {
- 
 			return "Error trying to add the new Menu " + e.getMessage();
 		}
- 
 	}
-
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -139,15 +130,9 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("/updateMenu")
 	public String updateMenu(MenuBean menu) {
 		try {
-			MenuBean entity = new MenuBean(menu.getId(),menu.getRestaurant(), menu.getName(), menu.getDescription(),
-					menu.getPrice(), menu.getScore());
-			entity.setVisible(menu.isVisible());
-			entity.update();
- 
+			menu.update();
 			return "Menu  "+menu.getId() +"  updated successfully!";
- 
 		} catch (Exception e) {
- 
 			return "Error trying to update the  Menu " + e.getMessage();
 		}
 	}
