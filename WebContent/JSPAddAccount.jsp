@@ -21,10 +21,11 @@
 	<input class="large" type="text" name="accountid" required="required" placeholder="User"/><span class="icon-place"></span></div></div>
 	<div class="element-password"><label class="title"></label><div class="item-cont">
 	<input class="large" type="password" name="password" value="" placeholder="Password"/><span class="icon-place"></span></div></div>
-	<div class="element-select"><label class="title"></label><div class="item-cont"><div class="large"><span><select name="select" >
-		<option name="type" value="restaurant">Restaurant</option>
+	<div class="element-select"><label class="title"></label><div class="item-cont"><div class="large"><span><select name="type" >
+		<option value="restaurant" selected>Restaurant</option>
 	</select><i></i><span class="icon-place"></span></span></div></div></div>
 	<div class="element-recaptcha"><label class="title"></label><script type="text/javascript">var RecaptchaOptions = {theme : "clean"};</script>
+	<input type="hidden" name="action" value="addaccount">
 <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LdpLw8UAAAAAGGK4ONQKkkjfinzMKJBdITuPtwe&theme=clean"></script>
 <noscript><iframe src="http://www.google.com/recaptcha/api/noscript?k=6LdpLw8UAAAAAGGK4ONQKkkjfinzMKJBdITuPtwe&hl=en" height="300" width="500" frameborder="0"></iframe></br>
 <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea><input type="hidden" name="recaptcha_response_field" value="manual_challenge"></noscript>
