@@ -192,6 +192,13 @@ public class MenuFinderWs implements IMenuFinderWS {
 		return RestaurantBean.getAllBeans();
 	}
 
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getFilteredRestaurants")
+	public List<RestaurantBean> getFilteredRestaurants(String filter) {
+		return RestaurantBean.getFilteredRestaurants(filter);
+	}
+
 	@DELETE	
 	@Consumes("application/json; charset=UTF-8")
 	@Produces("application/json; charset=UTF-8")

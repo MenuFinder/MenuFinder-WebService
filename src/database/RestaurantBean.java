@@ -252,4 +252,18 @@ public class RestaurantBean extends Bean {
 		return rs.getDouble("score");
 	}
 
+	public static List<RestaurantBean> getFilteredRestaurants(String filter) {
+		List<RestaurantBean> restaurants = new ArrayList<>();
+		try {
+			ResultSet rs = select("SELECT r.* FROM " + table + " r " + "WHERE " + filter);
+			while (rs.next()) {
+				restaurants.add(getRestaurantFromRS(rs));
+			}
+		} catch (SQLException ex) {
+			System.err.println("Error retrieving filterd restaurants. WHERE (" + filter + ").");
+			ex.printStackTrace();
+		}
+		return restaurants;
+	}
+
 }

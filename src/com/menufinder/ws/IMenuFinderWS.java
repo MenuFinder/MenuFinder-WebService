@@ -37,6 +37,7 @@ public interface IMenuFinderWS {
 	public List<RestaurantBean> getRestaurants();
 	public String deleteRestaurant(@PathParam("id") long restaurantId);
 	public String updateRestaurant(RestaurantBean restaurant);
+	public List<RestaurantBean> getFilteredRestaurants(String filter);
 
 	public ReviewBean getReviewById(@PathParam("id")long reviewId);
 	public List<ReviewBean> getReviewsOfItem(@PathParam("id")long itemId);
