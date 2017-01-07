@@ -68,6 +68,21 @@ public class MenuFinderWs implements IMenuFinderWS {
 		}
 	}
 
+	@PUT
+	@Consumes("application/json; charset=UTF-8")
+	@Produces("application/json; charset=UTF-8")
+	@Path("/updateAccountToken")
+	public String updateAccountToken(AccountBean account) {
+		try {
+			AccountBean a = AccountBean.getAccountById(account.getId());
+			a.setToken(account.getToken());
+			a.update();
+			return "Account "+ account.getId() +" token updated successfully!";
+		} catch (Exception e) {
+			return "Error trying to update the token of account: " + e.getMessage();
+		}
+	}
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("restaurantMenus/{id}")
