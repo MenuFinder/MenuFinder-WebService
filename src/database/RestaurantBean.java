@@ -21,6 +21,7 @@ public class RestaurantBean extends Bean {
 	private String email;
 	private String phone;
 	private String account;
+	private double score;
 
 	public RestaurantBean(long id, String name, String cif, String address, String city, String postalCode,
 			String state, String country, String email, String phone, String account) {
@@ -36,6 +37,7 @@ public class RestaurantBean extends Bean {
 		this.email = email;
 		this.phone = phone;
 		this.account = account;
+		this.score = 0;
 	}
 
 	public RestaurantBean(String name, String cif, String address, String city, String postalCode, String state,
@@ -52,10 +54,12 @@ public class RestaurantBean extends Bean {
 		this.phone = phone;
 		this.account = account;
 		id = -1;
+		this.score = 0;
 	}
 
 	public RestaurantBean() {
 		super();
+		this.score = 0;
 	}
 
 	public long getId() {
@@ -154,6 +158,14 @@ public class RestaurantBean extends Bean {
 		return "DELETE FROM " + table + " WHERE id = " + id;
 	}
 
+	public double getScore() {
+		return score;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
+	}
+
 	protected String getUpdateQuery() {
 		return "UPDATE " + table + " SET name = '" + name + "', cif = '" + cif + "', address = '" + address
 				+ "', city = '" + city + "', postalcode = '" + postalCode + "', state = '" + state + "', country = '"
@@ -202,9 +214,20 @@ public class RestaurantBean extends Bean {
 	}
 
 	private static RestaurantBean getRestaurantFromRS(ResultSet rs) throws SQLException {
-		return new RestaurantBean(rs.getLong("id"), rs.getString("name"), rs.getString("cif"),
-				rs.getString("address"), rs.getString("city"), rs.getString("postalcode"), rs.getString("state"),
-				rs.getString("country"), rs.getString("email"), rs.getString("phone"), rs.getString("account"));
+		RestaurantBean restaurant = new RestaurantBean();
+		restaurant.setId(rs.getLong("id"));
+		restaurant.setName(rs.getString("name"));
+		restaurant.setCif(rs.getString("cif"));
+		restaurant.setAddress(rs.getString("address"));
+		restaurant.setCity(rs.getString("city"));
+		restaurant.setPostalCode(rs.getString("postalcode"));
+		restaurant.setState(rs.getString("state"));
+		restaurant.setCountry(rs.getString("country"));
+		restaurant.setEmail(rs.getString("email"));
+		restaurant.setPhone(rs.getString("phone"));
+		restaurant.setAccount(rs.getString("account"));
+		restaurant.setScore(rs.getDouble("score"));
+		return restaurant;
 	}
 
 	public static List<RestaurantBean> getSubscribedRestaurantsOfAccount(String accountId) {
@@ -220,6 +243,13 @@ public class RestaurantBean extends Bean {
 			ex.printStackTrace();
 		}
 		return restaurants;
+	}
+
+	public static double getScoreOfRestaurant(long restaurantId) throws SQLException {
+		ResultSet rs = select("SELECT AVG(m.score) AS score FROM " + MenuBean.getTable() + " m, " + table
+				+ " r WHERE r.id = m.restaurant AND r.id = " + restaurantId);
+		rs.next();
+		return rs.getDouble("score");
 	}
 
 }

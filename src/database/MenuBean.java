@@ -99,6 +99,10 @@ public class MenuBean extends Bean {
 		this.visible = visible;
 	}
 
+	public static String getTable() {
+		return table;
+	}
+
 	protected String getDeleteQuery() {
 		return "DELETE FROM " + table + " WHERE id = " + id;
 	}
