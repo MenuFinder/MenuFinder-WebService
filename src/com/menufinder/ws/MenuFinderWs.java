@@ -225,11 +225,12 @@ public class MenuFinderWs implements IMenuFinderWS {
 	@Path("/updateRestaurant")
 	public String updateRestaurant(RestaurantBean restaurant) {
 		try {
+			String message = "Restaurant " + restaurant.getName() +" updated successfully!";
 			restaurant.update();
-			notification.sendNotification(AccountBean.getAccountById(restaurant.getAccount()),
-					"Restaurant " + restaurant.getName() +" updated successfully!");
+			notification.sendNotification(AccountBean.getAccountById(restaurant.getAccount()), message);
+			notification.sendNotificationToTopic(String.valueOf(restaurant.getId()), message);
 
-			return "Restaurant  "+restaurant.getId() +"  updated successfully!";
+			return message;
  
 		} catch (Exception e) {
  
