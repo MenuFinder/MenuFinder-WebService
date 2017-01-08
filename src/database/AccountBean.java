@@ -74,7 +74,7 @@ public class AccountBean extends Bean {
 	@Override
 	protected String getUpdateQuery() {
 		return "UPDATE " + table + " SET password = '" + password + "', type = '" + type + "', token = '" + token
-				+ ", email = '" + email + "' WHERE id = '" + id + "'";
+				+ "', email = '" + email + "' WHERE id = '" + id + "'";
 	}
 
 	@Override
