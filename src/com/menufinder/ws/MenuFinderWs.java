@@ -28,11 +28,14 @@ import database.ReviewBean;
 import database.ReviewItemBean;
 import database.ReviewMenuBean;
 import database.ReviewRestaurantBean;
+import useful.Notifications;
 
 
 
 @Path("/menufinderws")
 public class MenuFinderWs implements IMenuFinderWS {
+
+	private static final Notifications notification = new Notifications();
 
 	//@Inject
 	//private EntityManager em;
@@ -223,6 +226,8 @@ public class MenuFinderWs implements IMenuFinderWS {
 	public String updateRestaurant(RestaurantBean restaurant) {
 		try {
 			restaurant.update();
+			notification.sendNotification(AccountBean.getAccountById(restaurant.getAccount()),
+					"Restaurant " + restaurant.getName() +" updated successfully!");
 
 			return "Restaurant  "+restaurant.getId() +"  updated successfully!";
  

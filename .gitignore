@@ -82,3 +82,6 @@ build/
 
 # Code Recommenders
 .recommenders/
+
+# Properties
+*.properties
