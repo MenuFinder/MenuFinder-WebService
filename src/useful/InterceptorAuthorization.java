@@ -30,6 +30,7 @@ public class InterceptorAuthorization implements Filter {
 			newRequestPage.contains("css")	||
 			newRequestPage.contains("img")	||
 			newRequestPage.contains("webservice")	||
+			newRequestPage.contains("MenuFinderSOAP") ||
 			((HttpServletRequest) request).getSession().getAttribute("loggedUser") != null) {			        			    
 			chain.doFilter(request, response);
 		} else {
