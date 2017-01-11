@@ -79,8 +79,8 @@ public class AccountBean extends Bean {
 
 	@Override
 	protected String getInsertQuery() {
-		return "INSERT INTO " + table + " (id, password, type, token, email) VALUES ('" + id + "', '" + password + "', '"
-				+ type + "', '" + token + "', '" + email + "')";
+		return "INSERT INTO " + table + " (id, password, type, token, email) VALUES ('" + id + "', '" + password
+				+ "', '" + type + "', '" + token + "', '" + email + "')";
 	}
 
 	private static AccountBean getAccountFromRS(ResultSet rs) throws SQLException {
@@ -101,7 +101,8 @@ public class AccountBean extends Bean {
 
 	public static boolean isValidLogin(String id, String password) {
 		try {
-			ResultSet rs = select("SELECT * FROM " + table + " WHERE id = '" + id + "' AND password = '" + password + "'");
+			ResultSet rs = select(
+					"SELECT * FROM " + table + " WHERE id = '" + id + "' AND password = '" + password + "'");
 			rs.next();
 			rs.getString("id");
 			return true;
@@ -109,31 +110,20 @@ public class AccountBean extends Bean {
 			return false;
 		}
 	}
-	
-	public static AccountBean getValidLogin(String id, String password){
-		AccountBean loggedAcc = new AccountBean();
-		
-		try
-		{
+
+	public static AccountBean getValidLogin(String id, String password) {
+		try {
 			DBManager db = DBManager.getInstance();
-			PreparedStatement pst = db.getConnection().prepareStatement("SELECT * FROM " + table + " WHERE id=? AND password=?");
-	         pst.setString(1, id);
-	         pst.setString(2, password);
-	         ResultSet rs = pst.executeQuery();
-	         if(rs.next()){  
-	        	 loggedAcc.setId(rs.getString("id"));
-	        	 loggedAcc.setPassword(rs.getString("password"));  	        	  
-	        	 loggedAcc.setType(rs.getString("type"));  	
-	        	 return loggedAcc;
-	            }  
-	         else
-	        	 return null;
-		}
-		catch(SQLException ex)
-		{
+			PreparedStatement pst = db.getConnection()
+					.prepareStatement("SELECT * FROM " + table + " WHERE id=? AND password=?");
+			pst.setString(1, id);
+			pst.setString(2, password);
+			ResultSet rs = pst.executeQuery();
+			if (rs.next()) return getAccountFromRS(rs);
+		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
-		return null;				
+		return new AccountBean();
 	}
 
 }
