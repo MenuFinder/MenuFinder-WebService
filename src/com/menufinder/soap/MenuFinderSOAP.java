@@ -3,6 +3,7 @@ package com.menufinder.soap;
 import java.sql.SQLException;
 import java.util.List;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import database.AccountBean;
@@ -25,13 +26,13 @@ public class MenuFinderSOAP {
 	private static final Notifications notification = new Notifications();
 
 	@WebMethod(action = "getValidLogin")
-	public AccountBean getValidLogin(AccountBean account) {
+	public AccountBean getValidLogin(@WebParam(name = "account") AccountBean account) {
 		AccountBean login = AccountBean.getValidLogin(account.getId(), account.getPassword());
 		return login != null ? login : new AccountBean();
 	}
 
 	@WebMethod(action = "registerAccount")
-	public String registerAccount(AccountBean account) {
+	public String registerAccount(@WebParam(name = "account") AccountBean account) {
 		try {
 			account.insert();
 			return "Account '" + account.getId() + "' created successfully!";
@@ -41,7 +42,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "updateAccountToken")
-	public String updateAccountToken(AccountBean account) {
+	public String updateAccountToken(@WebParam(name = "account") AccountBean account) {
 		try {
 			AccountBean a = AccountBean.getAccountById(account.getId());
 			a.setToken(account.getToken());
@@ -53,12 +54,12 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "getMenusByRestaurantId")
-	public List<MenuBean> getMenusByRestaurantId(long restaurantId) {
+	public List<MenuBean> getMenusByRestaurantId(@WebParam(name = "restaurantId") long restaurantId) {
 		return MenuBean.getMenusOfRestaurant(restaurantId);
 	}
 
 	@WebMethod(action = "getMenuById")
-	public MenuBean getMenuById(long menuId) {
+	public MenuBean getMenuById(@WebParam(name = "menuId") long menuId) {
 		try {
 			return MenuBean.getMenuById(menuId);
 		} catch (SQLException e) {
@@ -67,7 +68,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "addMenu")
-	public String addMenu(MenuBean menu) {
+	public String addMenu(@WebParam(name = "menu") MenuBean menu) {
 		try {
 			menu.insert();
 			return "Menu '" + menu.getName() + "' added successfully!";
@@ -82,7 +83,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "deleteMenu")
-	public String deleteMenu(long menuId) {
+	public String deleteMenu(@WebParam(name = "menuId") long menuId) {
 		try {
 			MenuBean menu = new MenuBean();
 			menu.setId(menuId);
@@ -94,7 +95,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "updateMenu")
-	public String updateMenu(MenuBean menu) {
+	public String updateMenu(@WebParam(name = "menu") MenuBean menu) {
 		try {
 			menu.update();
 			return "Menu '" + menu.getId() + "' updated successfully!";
@@ -104,7 +105,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "getRestaurantById")
-	public RestaurantBean getRestaurantById(long restaurantId) {
+	public RestaurantBean getRestaurantById(@WebParam(name = "restaurantId") long restaurantId) {
 		try {
 			return RestaurantBean.getRestaurantById(restaurantId);
 		} catch (SQLException e) {
@@ -113,12 +114,12 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "getRestaurantsOfAccount")
-	public List<RestaurantBean> getRestaurantsOfAccount(String accountId) {
+	public List<RestaurantBean> getRestaurantsOfAccount(@WebParam(name = "accountId") String accountId) {
 		return RestaurantBean.getRestaurantsOfAccount(accountId);
 	}
 
 	@WebMethod(action = "addRestaurant")
-	public String addRestaurant(RestaurantBean restaurant) {
+	public String addRestaurant(@WebParam(name = "restaurant") RestaurantBean restaurant) {
 		try {
 			restaurant.insert();
 			return "Restaurant '" + restaurant.getName() + "' added successfully!";
@@ -133,7 +134,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "deleteRestaurant")
-	public String deleteRestaurant(long restaurantId) {
+	public String deleteRestaurant(@WebParam(name = "restaurantId") long restaurantId) {
 		try {
 			RestaurantBean restaurant = new RestaurantBean();
 			restaurant.setId(restaurantId);
@@ -145,7 +146,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "updateRestaurant")
-	public String updateRestaurant(RestaurantBean restaurant) {
+	public String updateRestaurant(@WebParam(name = "restaurant") RestaurantBean restaurant) {
 		try {
 			String message = "Restaurant " + restaurant.getName() + " updated!";
 			restaurant.update();
@@ -158,12 +159,12 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "getFilteredRestaurants")
-	public List<RestaurantBean> getFilteredRestaurants(String filter) {
+	public List<RestaurantBean> getFilteredRestaurants(@WebParam(name = "filter") String filter) {
 		return RestaurantBean.getFilteredRestaurants(filter);
 	}
 
 	@WebMethod(action = "getReviewById")
-	public ReviewBean getReviewById(long reviewId) {
+	public ReviewBean getReviewById(@WebParam(name = "reviewId") long reviewId) {
 		try {
 			return ReviewBean.getReviewById(reviewId);
 		} catch (SQLException e) {
@@ -172,22 +173,22 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "getReviewsOfItem")
-	public List<ReviewBean> getReviewsOfItem(long itemId) {
+	public List<ReviewBean> getReviewsOfItem(@WebParam(name = "itemId") long itemId) {
 		return ReviewItemBean.getReviewsOfItem(itemId);
 	}
 
 	@WebMethod(action = "getReviewsOfMenu")
-	public List<ReviewBean> getReviewsOfMenu(long menuId) {
+	public List<ReviewBean> getReviewsOfMenu(@WebParam(name = "menuId") long menuId) {
 		return ReviewMenuBean.getReviewsOfMenu(menuId);
 	}
 
 	@WebMethod(action = "getReviewsOfRestaurant")
-	public List<ReviewBean> getReviewsOfRestaurant(long restaurantId) {
+	public List<ReviewBean> getReviewsOfRestaurant(@WebParam(name = "restaurantId") long restaurantId) {
 		return ReviewRestaurantBean.getReviewsOfRestaurant(restaurantId);
 	}
 
 	@WebMethod(action = "updateReview")
-	public String updateReview(ReviewBean review) {
+	public String updateReview(@WebParam(name = "review") ReviewBean review) {
 		try {
 			review.update();
 		} catch (SQLException e) {
@@ -197,7 +198,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "deleteReview")
-	public String deleteReview(long reviewId) {
+	public String deleteReview(@WebParam(name = "reviewId") long reviewId) {
 		ReviewBean review = new ReviewBean();
 		review.setId(reviewId);
 		try {
@@ -209,7 +210,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "addReview")
-	public String addReview(ReviewBean review) {
+	public String addReview(@WebParam(name = "review") ReviewBean review) {
 		try {
 			review.insert();
 		} catch (SQLException e) {
@@ -219,7 +220,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "updateItem")
-	public String updateItem(ItemBean item) {
+	public String updateItem(@WebParam(name = "item") ItemBean item) {
 		try {
 			item.update();
 		} catch (SQLException e) {
@@ -229,7 +230,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "deleteItem")
-	public String deleteItem(long itemId) {
+	public String deleteItem(@WebParam(name = "itemId") long itemId) {
 		ItemBean item = new ItemBean();
 		item.setId(itemId);
 		try {
@@ -241,7 +242,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "addItem")
-	public String addItem(ItemBean item) {
+	public String addItem(@WebParam(name = "item") ItemBean item) {
 		try {
 			item.insert();
 		} catch (SQLException e) {
@@ -252,7 +253,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "getItemById")
-	public ItemBean getItemById(long itemId) {
+	public ItemBean getItemById(@WebParam(name = "itemId") long itemId) {
 		try {
 			return ItemBean.getItemById(itemId);
 		} catch (SQLException e) {
@@ -261,12 +262,12 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "getRestaurantItems")
-	public List<ItemBean> getRestaurantItems(long restaurantId) {
+	public List<ItemBean> getRestaurantItems(@WebParam(name = "restaurantId") long restaurantId) {
 		return ItemBean.getRestaurantItems(restaurantId);
 	}
 
 	@WebMethod(action = "deleteMenuItem")
-	public String deleteMenuItem(MenuItemBean menuItem) {
+	public String deleteMenuItem(@WebParam(name = "menuItem") MenuItemBean menuItem) {
 		try {
 			menuItem.delete();
 			return "Item " + menuItem.getItem() + " deleted successfully from menu " + menuItem.getMenu() + " !";
@@ -276,7 +277,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "addMenuItem")
-	public String addMenuItem(MenuItemBean menuItem) {
+	public String addMenuItem(@WebParam(name = "menuItem") MenuItemBean menuItem) {
 		try {
 			menuItem.insert();
 		} catch (SQLException e) {
@@ -286,7 +287,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "getItemCategoryById")
-	public ItemCategoryBean getItemCategoryById(long id) {
+	public ItemCategoryBean getItemCategoryById(@WebParam(name = "itemCategoryId") long id) {
 		try {
 			return ItemCategoryBean.getItemCategoryById(id);
 		} catch (SQLException e) {
@@ -295,7 +296,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "updateItemCategory")
-	public String updateItemCategory(ItemCategoryBean itemCategory) {
+	public String updateItemCategory(@WebParam(name = "itemCategory") ItemCategoryBean itemCategory) {
 		try {
 			itemCategory.update();
 		} catch (SQLException e) {
@@ -305,7 +306,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "deleteItemCategory")
-	public String deleteItemCategory(long id) {
+	public String deleteItemCategory(@WebParam(name = "itemCategoryId") long id) {
 		try {
 			ItemCategoryBean entity = new ItemCategoryBean();
 			entity.setId(id);
@@ -317,7 +318,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "addItemCategory")
-	public String addItemCategory(ItemCategoryBean itemCategory) {
+	public String addItemCategory(@WebParam(name = "itemCategory") ItemCategoryBean itemCategory) {
 		try {
 			itemCategory.insert();
 		} catch (SQLException e) {
@@ -332,7 +333,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "updateItemRating")
-	public String updateItemRating(ItemRatingBean itemRating) {
+	public String updateItemRating(@WebParam(name = "itemRating") ItemRatingBean itemRating) {
 		try {
 			itemRating.update();
 		} catch (SQLException e) {
@@ -342,7 +343,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "deleteItemRating")
-	public String deleteItemRating(ItemRatingBean itemRating) {
+	public String deleteItemRating(@WebParam(name = "itemRating") ItemRatingBean itemRating) {
 		try {
 			itemRating.delete();
 			return "Rating " + itemRating.getId() + " deleted successfully!";
@@ -352,7 +353,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "addItemRating")
-	public String addItemRating(ItemRatingBean itemRating) {
+	public String addItemRating(@WebParam(name = "itemRating") ItemRatingBean itemRating) {
 		try {
 			itemRating.insert();
 		} catch (SQLException e) {
@@ -362,17 +363,18 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "getRatingsOfItem")
-	public List<ItemRatingBean> getRatingsOfItem(long itemId) {
+	public List<ItemRatingBean> getRatingsOfItem(@WebParam(name = "itemId") long itemId) {
 		return ItemRatingBean.getRatingsOfItem(itemId);
 	}
 
 	@WebMethod(action = "getItemRatingOfItem")
-	public String getItemRatingOfItem(long itemId) {
+	public String getItemRatingOfItem(@WebParam(name = "itemId") long itemId) {
 		return String.valueOf(ItemRatingBean.getItemRatingOfItem(itemId));
 	}
 
 	@WebMethod(action = "deleteAccountSubscription")
-	public String deleteAccountSubscription(AccountSubscriptionBean accountSubscription) {
+	public String deleteAccountSubscription(
+			@WebParam(name = "accountSubscription") AccountSubscriptionBean accountSubscription) {
 		try {
 			accountSubscription.delete();
 			return "Feed of account " + accountSubscription.getAccount() + " deleted successfully!";
@@ -382,7 +384,8 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "addAccountSubscription")
-	public String addAccountSubscription(AccountSubscriptionBean accountSubscription) {
+	public String addAccountSubscription(
+			@WebParam(name = "accountSubscription") AccountSubscriptionBean accountSubscription) {
 		try {
 			accountSubscription.insert();
 		} catch (SQLException e) {
@@ -392,7 +395,7 @@ public class MenuFinderSOAP {
 	}
 
 	@WebMethod(action = "getSubscribedRestaurantsOfAccount")
-	public List<RestaurantBean> getSubscribedRestaurantsOfAccount(String accountId) {
+	public List<RestaurantBean> getSubscribedRestaurantsOfAccount(@WebParam(name = "accountId") String accountId) {
 		return RestaurantBean.getSubscribedRestaurantsOfAccount(accountId);
 	}
 
