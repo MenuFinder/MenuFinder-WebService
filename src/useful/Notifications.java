@@ -15,7 +15,7 @@ import database.AccountBean;
 
 public class Notifications {
 
-	private static final String configFile = "notifications.properties";
+	private static final String configFile = "/home/jboss/notifications.properties";
 	private String firebaseURL;
 	private String firebaseServerKey;
 
