@@ -23,15 +23,15 @@ public class Notifications {
 		loadNotificationsProperties();
 	}
 
-	public boolean sendNotification(AccountBean account, String message) {
-		return sendNotification(account.getToken(), message);
+	public boolean sendNotification(AccountBean account, String title, String message) {
+		return sendNotification(account.getToken(), title, message);
 	}
 
-	public boolean sendNotificationToTopic(String topic, String message) {
-		return sendNotification("/topics/" + topic, message);
+	public boolean sendNotificationToTopic(String topic, String title, String message) {
+		return sendNotification("/topics/" + topic, title, message);
 	}
 
-	private boolean sendNotification(String to, String message) {
+	private boolean sendNotification(String to, String title, String message) {
 		try {
 			URL url = new URL(firebaseURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -41,7 +41,8 @@ public class Notifications {
 			conn.setRequestProperty("Authorization", "key=" + firebaseServerKey);
 			conn.setDoOutput(true);
 			DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-			wr.writeBytes("{\"notification\":{\"title\":\"NOTI\",\"text\":\"" + message + "\"},\"to\":\"" + to + "\"}");
+			wr.writeBytes("{\"notification\":{\"title\":\"" + title + "\",\"text\":\""
+					+ message + "\"},\"to\":\"" + to + "\"}");
 			wr.flush();
 			wr.close();
 			conn.getResponseCode();

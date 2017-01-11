@@ -148,10 +148,11 @@ public class MenuFinderSOAP {
 	@WebMethod(action = "updateRestaurant")
 	public String updateRestaurant(@WebParam(name = "restaurant") RestaurantBean restaurant) {
 		try {
-			String message = "Restaurant " + restaurant.getName() + " updated!";
+			String title = "Subscribed restaurant news";
+			String message = "Restaurant " + restaurant.getName() +" updated successfully!";
 			restaurant.update();
-			notification.sendNotification(AccountBean.getAccountById(restaurant.getAccount()), message);
-			notification.sendNotificationToTopic(String.valueOf(restaurant.getId()), message);
+			notification.sendNotification(AccountBean.getAccountById(restaurant.getAccount()), title, message);
+			notification.sendNotificationToTopic(String.valueOf(restaurant.getId()), title, message);
 			return message;
 		} catch (Exception e) {
 			return "Error trying to update restaurant: " + e.getMessage();
