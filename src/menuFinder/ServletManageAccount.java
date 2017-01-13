@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import database.AccountBean;
 import database.RestaurantBean;
+import useful.MD5;
 
 /**
  * Servlet implementation class ServletManageAccount
@@ -77,7 +78,7 @@ public class ServletManageAccount extends HttpServlet {
 		//ServletManageRestaurant list = new ServletManageRestaurant();
 		try{
 			String accountId = request.getParameter("accountid");
-			String password = request.getParameter("password");
+			String password = MD5.md5(request.getParameter("password"));
 			AccountBean loggedAccount = AccountBean.getValidLogin(accountId, password);
 			if(loggedAccount != null){
 				HttpSession session = request.getSession();
@@ -106,7 +107,7 @@ public class ServletManageAccount extends HttpServlet {
 	private void addaccount(HttpServletRequest request, HttpServletResponse response) {
 		String accountid = request.getParameter("accountid");
 		System.out.println("Creating account: " + accountid);
-		String password = request.getParameter("password");
+		String password = MD5.md5(request.getParameter("password"));
 		String type = request.getParameter("type");
 		AccountBean a = new AccountBean(accountid, password, type);
 		try {
