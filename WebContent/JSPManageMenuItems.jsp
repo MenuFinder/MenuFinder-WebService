@@ -11,7 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	long menuId = (long) session.getAttribute("menuid");
+	long menuId = Long.parseLong(session.getAttribute("menuid").toString());
 	MenuBean menu = MenuBean.getMenuById(menuId);
 	List<ItemBean> restaurantItems = ItemBean.getRestaurantItems(menu.getRestaurant());
 	List<ItemCategoryBean> categories = ItemCategoryBean.getAllBeans();

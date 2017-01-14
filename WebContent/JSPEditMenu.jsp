@@ -11,9 +11,9 @@
 </head>
 <body class="blurBg-false" style="background-color: #EBEBEB">
 	<%
-		long menuId = (long) session.getAttribute("menuid");
+		long menuId = Long.parseLong(session.getAttribute("menuid").toString());
 		MenuBean menu = MenuBean.getMenuById(menuId);
-		long restaurantId = (long) session.getAttribute("restaurantid");
+		long restaurantId = Long.parseLong(session.getAttribute("restaurantid").toString());
 		double menuScore = menu.getScore();
 	%>
 	<link rel="stylesheet"

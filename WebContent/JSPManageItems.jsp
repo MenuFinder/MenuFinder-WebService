@@ -21,7 +21,7 @@
 <script type="text/javascript" src="addmenu_files/formoid1/jquery.min.js"></script>
 
 <%
-	long restaurantId =(long) session.getAttribute("restaurantid");
+	long restaurantId = Long.parseLong(session.getAttribute("restaurantid").toString());
 	AccountBean userId = (AccountBean) session.getAttribute("loggedUser");
 %>
 	<section id="body" class="width">

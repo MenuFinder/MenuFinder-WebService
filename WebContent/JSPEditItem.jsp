@@ -11,9 +11,9 @@
 </head>
 <body class="blurBg-false" style="background-color: #EBEBEB">
 	<%
-	long itemId =(long) session.getAttribute("itemid");
+	long itemId = Long.parseLong(session.getAttribute("itemid").toString());
 	ItemBean item = ItemBean.getItemById(itemId);
-	long restaurantId =(long) session.getAttribute("restaurantid");
+	long restaurantId = Long.parseLong(session.getAttribute("restaurantid").toString());
 	double itemScore = item.getScore();
 %>
 	<link rel="stylesheet"

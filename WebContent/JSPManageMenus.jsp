@@ -23,7 +23,7 @@
 		src="addmenu_files/formoid1/jquery.min.js"></script>
 	<section id="body" class="width"> <aside id="sidebar"
 		class="column-left"> <%
- 	long restaurantId = (long) session.getAttribute("restaurantid");
+	long restaurantId = Long.parseLong(session.getAttribute("restaurantid").toString());
  	AccountBean userId = (AccountBean) session.getAttribute("loggedUser");
  %> <header> <img src="img/new_logo_android.png" width="125"
 		height="117" style="padding-left: 40px">
