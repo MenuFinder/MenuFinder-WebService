@@ -31,15 +31,13 @@
 				
 				<img src="img/new_logo_android.png" width="125" height="117" style="padding-left: 40px">
 				<h1><a href="#">MenuFinder</a></h1>
-				<h2>Usuario: <%=userId.getId()%> </h2>				
+				<h2>User: <%=userId.getId()%> </h2>
 			</header>
 
 			<nav id="mainnav">
   				<ul>
-                    <li class="selected-item"><a href="index.html">Home</a></li>
-                    <li><a href="examples.html">Settings</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">LogOut</a></li>
+                    <li><a href="jManageRestaurants">My restaurants</a></li>
+                    <li><a href="sManageAccount?action=logout">Log out</a></li>
                             		
                 </ul>
 			</nav>		
@@ -56,7 +54,7 @@
 			</form>			
 			</article>
 		<article class="expanded">            		
-			<div class="article-info">MenuFInder DashBoard</div>
+			<div class="article-info"><%=RestaurantBean.getRestaurantById(restaurantId).getName()%> Restaurant - Items</div>
 			<table>
 					<tr>					
 						<th>Name</th>

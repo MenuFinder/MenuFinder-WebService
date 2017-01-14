@@ -80,7 +80,7 @@ public class ServletManageAccount extends HttpServlet {
 			String accountId = request.getParameter("accountid");
 			String password = MD5.md5(request.getParameter("password"));
 			AccountBean loggedAccount = AccountBean.getValidLogin(accountId, password);
-			if(loggedAccount != null){
+			if(loggedAccount != null && loggedAccount.getType().equals("restaurant")){
 				HttpSession session = request.getSession();
 				session.setAttribute("loggedUser", loggedAccount);
 				System.out.println("Looged: " + session.getAttribute("loggedUser"));

@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Menu Finder - Manage Menu</title>
+<title>Menu Finder - Manage Menus</title>
 <link rel="stylesheet" href="css/stylesMain.css" type="text/css" />
 <meta name="viewport"
 	content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
@@ -31,15 +31,13 @@
 		<a href="#">MenuFinder</a>
 	</h1>
 	<h2>
-		Usuario:
+		User:
 		<%=userId.getId()%>
 	</h2>
 	</header> <nav id="mainnav">
 	<ul>
-		<li class="selected-item"><a href="index.html">Home</a></li>
-		<li><a href="examples.html">Settings</a></li>
-		<li><a href="#">Contact</a></li>
-		<li><a href="#">LogOut</a></li>
+		<li><a href="jManageRestaurants">My restaurants</a></li>
+		<li><a href="sManageAccount?action=logout">Log out</a></li>
 
 	</ul>
 	</nav> </aside> <section id="content" class="column-right"> <article>
@@ -49,7 +47,7 @@
 		<input type="submit" class="button" value="Add menu">
 	</form>
 	</article> <article class="expanded">
-	<div class="article-info">restaurantId</div>
+	<div class="article-info"><%=RestaurantBean.getRestaurantById(restaurantId).getName()%> Restaurant - Menus</div>
 
 	<table>
 		<tr>
