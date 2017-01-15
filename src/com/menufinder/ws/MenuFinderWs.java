@@ -228,8 +228,10 @@ public class MenuFinderWs implements IMenuFinderWS {
 			String title = "Subscribed restaurant news";
 			String message = "Restaurant " + restaurant.getName() +" updated successfully!";
 			restaurant.update();
-			notification.sendNotification(AccountBean.getAccountById(restaurant.getAccount()), title, message);
-			notification.sendNotificationToTopic(String.valueOf(restaurant.getId()), title, message);
+			notification.sendNotification(AccountBean.getAccountById(restaurant.getAccount()), title, message,
+					String.valueOf(restaurant.getId()));
+			notification.sendNotificationToTopic(String.valueOf(restaurant.getId()), title, message,
+					String.valueOf(restaurant.getId()));
 
 			return message;
  
